@@ -1,8 +1,11 @@
 class User < ApplicationRecord
+  before_validation :strip_phone
 
-  # def phone=(val)
-  #   self.phone.gsub!(/\D/, '')
-  # end
+  def strip_phone
+    if self.phone
+      self.phone.gsub!(/\D/, '')
+    end
+  end
 
   validates :name, presence: true
   validates :address, presence: true
