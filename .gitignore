@@ -20,3 +20,9 @@
 /node_modules
 /app/assets/javascripts/bundle.js
 /react/coverage
+
+# Ignore coverage files from coveralls/simple_cov
+/coverage
+
+# Ignore dot-env
+.env
