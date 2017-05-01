@@ -17,6 +17,7 @@ end
 
 group :development, :test do
   gem 'capybara'
+  gem "capybara-webkit" # to test JS actions
   gem 'factory_girl_rails'
   gem 'launchy', require: false
   gem 'pry-rails'
