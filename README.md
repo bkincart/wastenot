@@ -4,6 +4,9 @@
 ![Code Climate](https://codeclimate.com/github/bkincart/wastenot.png)
 ![Coverage Status](https://coveralls.io/repos/bkincart/wastenot/badge.png)
 
+User Stories can be found in /spec/stories
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

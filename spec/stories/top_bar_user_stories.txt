@@ -1,0 +1,30 @@
+As a visitor
+I want to see a top bar on every page
+So I can easily navigate the site
+
+Acceptance Criteria:
+** The top bar has the name WasteNot which links back to the root path
+** The top bar has a search bar which allows users to search for specific
+  inventory items
+** The top bar has options to Log In and Sign Up
+
+As a user
+I want to be able to sign in to the site
+So I can utilize my account
+
+Acceptance Criteria:
+** When not signed in, the user sees options to Log In and Sign Up
+** Once signed up, the user is automatically signed in
+** Once signed in, there is a flash message confirming they are signed in
+
+As an authorized user
+I want to see a menu of account actions
+So that I can update my account or sign out
+
+Acceptance Criteria:
+** Once signed in, "Sign Up" and "Log In" should be replaced by a drop-down menu
+  "My Account"
+** This dropdown menu should have links to "Update Profile" and "Sign Out"
+** It should also have an option to "Current Inventory" for Stores and "View Pickups"
+  for Shelters
+** Once signed out, there is a flash message confirming they are signed out

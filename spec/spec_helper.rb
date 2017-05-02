@@ -85,4 +85,7 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  # Test Javascript with capybara-webkit
+  # Capybara.javascript_driver = :webkit
 end

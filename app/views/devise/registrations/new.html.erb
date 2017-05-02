@@ -1,28 +1,71 @@
-<h2>Sign up</h2>
+<h2>Sign Up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <div class="row">
+    <%= f.label :type %><br />
+    <%= f.select :type, TYPES_COLLECTION, include_blank: true %>
+    <p class='error'><%= show_errors(resource, 'Type') %></p>
   </div>
 
-  <div class="field">
+  <div class="row">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true %>
+    <p class='error'><%= show_errors(resource, 'Name') %></p>
+  </div>
+
+  <div class="row">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+    <p class='error'><%= show_errors(resource, 'Address') %></p>
+  </div>
+
+  <div class="row">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+    <p class='error'><%= show_errors(resource, 'City') %></p>
+  </div>
+
+  <div class="row">
+    <%= f.label :state %><br />
+    <%= f.select :state, STATES, include_blank: true %>
+    <p class='error'><%= show_errors(resource, 'State') %></p>
+  </div>
+
+  <div class="row">
+    <%= f.label :zip %><br />
+    <%= f.text_field :zip %>
+    <p class='error'><%= show_errors(resource, 'Zip') %></p>
+  </div>
+
+  <div class="row">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+    <p class='error'><%= show_errors(resource, 'Phone') %></p>
+  </div>
+
+  <div class="row">
+    <%= f.label :email %><br />
+    <%= f.email_field :email %>
+    <p class='error'><%= show_errors(resource, 'Email') %></p>
+  </div>
+
+  <div class="row">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" %>
+    <p class='error'><%= show_errors(resource, 'Password') %></p>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign Up!" %>
   </div>
 <% end %>
 

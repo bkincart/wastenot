@@ -7,7 +7,7 @@ FactoryGirl.define do
     zip '02216'
     phone '5185552968'
     sequence(:email) { |n| "store#{n}@test.com" }
-    type 'store'
+    type 'Store'
     password 'password'
     password_confirmation 'password'
   end
@@ -20,7 +20,7 @@ FactoryGirl.define do
     zip '02215'
     phone '8395551827'
     sequence(:email) { |n| "shelter#{n}@test.com" }
-    type 'shelter'
+    type 'Shelter'
     password 'password'
     password_confirmation 'password'
   end
