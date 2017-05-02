@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates :zip, presence: true, numericality: true, length: { is: 5,
     message: 'must have a length of 5' }
   validates :phone, allow_blank: true, numericality: true, length: { in: 10..11 }
-  validates :type, inclusion: { in: ['Store', 'Shelter'],
+  validates :type, inclusion: { in: TYPES_COLLECTION,
     message: 'can\'t be blank' }
   validates :email, email: true,
     uniqueness: { message: "An account already exists for that email address!" }
