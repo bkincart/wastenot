@@ -1,11 +1,12 @@
 class CreatePickups < ActiveRecord::Migration[5.0]
   def change
     create_table :pickups do |t|
-      t.datetime :time, null: false
+      t.time :time, null: false
 
-      t.belongs_to :user
+      t.belongs_to :shelter
+      t.belongs_to :store
       t.belongs_to :inventory
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

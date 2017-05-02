@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 20170502024618) do
     t.index ["user_id"], name: "index_inventories_on_user_id", using: :btree
   end
 
+  create_table "pickups", force: :cascade do |t|
+    t.time     "time",         null: false
+    t.integer  "shelter_id"
+    t.integer  "store_id"
+    t.integer  "inventory_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["inventory_id"], name: "index_pickups_on_inventory_id", using: :btree
+    t.index ["shelter_id"], name: "index_pickups_on_shelter_id", using: :btree
+    t.index ["store_id"], name: "index_pickups_on_store_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name",                                null: false
     t.string   "address",                             null: false
