@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Top Bar Exists' do
-  #As a visitor
+  # As a visitor
   # I want to see a top bar on every page
   # So I can easily navigate the site
 
@@ -141,7 +141,8 @@ feature 'User Sign Up and Log In' do
     fill_in 'Password', with: 'password'
     click_button 'Log In'
 
-    expect(page).to have_content 'We don\'t have an account with that email! Please re-enter or sign up.'
+    expect(page).to have_content 'We don\'t have an account with that email!
+      Please re-enter or sign up.'
   end
 
   scenario 'user enters incorrect password' do

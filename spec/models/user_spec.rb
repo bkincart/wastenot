@@ -16,7 +16,8 @@ RSpec.describe User, type: :model do
   it { should have_valid(:zip).when('01456', '02216') }
   it { should_not have_valid(:zip).when('', nil, 'not numbers', '0421') }
 
-  it { should have_valid(:phone).when('8375557582', '932-555-1856', '1(285)555-1826', '28595551842') }
+  it { should have_valid(:phone).when('8375557582', '932-555-1856',
+    '1(285)555-1826', '28595551842') }
   it { should_not have_valid(:phone).when('6283655551927', '29182715', '295-555-184') }
 
   it { should have_valid(:email).when('Bob@gmail.com', 'Brianna@test.com') }
