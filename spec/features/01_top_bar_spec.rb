@@ -40,14 +40,14 @@ feature 'User Sign Up and Log In' do
     fill_in 'Phone', with: '617-555-2947'
     fill_in 'Email', with: 'star@test.com'
     fill_in 'Password', with: 'password'
-    fill_in 'Password Confirmation', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
     click_button 'Sign Up!'
 
-    expect(page).to have_content 'You have signed up successfully!'
+    expect(page).to have_content 'Welcome! You\'ve successfully signed up.'
     expect(page).to have_current_path(root_path)
     expect(page).to have_content 'My Account'
     expect(page).to_not have_content 'Log In'
-    expect(page).to_not have_content 'Sign In'
+    expect(page).to_not have_content 'Log In'
   end
 
   scenario 'user doesn\'t enter required information into signup form' do
@@ -55,18 +55,17 @@ feature 'User Sign Up and Log In' do
     click_link 'Sign Up'
     click_button 'Sign Up!'
 
-    expect(page).to have_content 'Type cannot be blank'
-    expect(page).to have_content 'Name cannot be blank'
-    expect(page).to have_content 'Address cannot be blank'
-    expect(page).to have_content 'City cannot be blank'
-    expect(page).to have_content 'State cannot be blank'
-    expect(page).to have_content 'Zip cannot be blank'
-    expect(page).to have_content 'Email cannot be blank'
-    expect(page).to have_content 'Password cannot be blank'
-    expect(page).to have_current_path(new_user_registration_path)
+    expect(page).to have_content 'Type can\'t be blank'
+    expect(page).to have_content 'Name can\'t be blank'
+    expect(page).to have_content 'Address can\'t be blank'
+    expect(page).to have_content 'City can\'t be blank'
+    expect(page).to have_content 'State can\'t be blank'
+    expect(page).to have_content 'Zip can\'t be blank'
+    expect(page).to have_content 'Email can\'t be blank'
+    expect(page).to have_content 'Password can\'t be blank'
     expect(page).to_not have_content 'My Account'
     expect(page).to have_content 'Log In'
-    expect(page).to have_content 'Sign In'
+    expect(page).to have_content 'Sign Up'
   end
 
   scenario 'user enters incorrectly formatted information into signup form' do
@@ -81,18 +80,16 @@ feature 'User Sign Up and Log In' do
     fill_in 'Phone', with: '617-555-2947183'
     fill_in 'Email', with: 'star@test'
     fill_in 'Password', with: 'password'
-    fill_in 'Password Confirmation', with: 'differentpassword'
+    fill_in 'Password confirmation', with: 'differentpassword'
     click_button 'Sign Up!'
 
     expect(page).to have_content 'Zip must have a length of 5'
-    expect(page).to have_content 'Phone must have be a minimum of 10 and maximum of 11'
+    expect(page).to have_content 'Phone is too long (maximum is 11 characters)'
     expect(page).to have_content 'Email is not a valid email address'
-    expect(page).to have_content 'Password is too short (minimum is 6 characters)'
     expect(page).to have_content 'Password confirmation doesn\'t match Password'
-    expect(page).to have_current_path(new_user_registration_path)
     expect(page).to_not have_content 'My Account'
     expect(page).to have_content 'Log In'
-    expect(page).to have_content 'Sign In'
+    expect(page).to have_content 'Sign Up'
   end
 
   scenario 'user gives email address that already has an account' do
@@ -109,7 +106,7 @@ feature 'User Sign Up and Log In' do
     fill_in 'Phone', with: '617-555-2947'
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'password'
-    fill_in 'Password Confirmation', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
     click_button 'Sign Up!'
 
     expect(page).to have_content 'An account already exists for that email address!'
@@ -127,7 +124,7 @@ feature 'User Sign Up and Log In' do
     expect(page).to have_current_path(root_path)
     expect(page).to have_content 'My Account'
     expect(page).to_not have_content 'Log In'
-    expect(page).to_not have_content 'Sign In'
+    expect(page).to_not have_content 'Sign Up'
   end
 
   scenario 'user omits required information in login form' do
@@ -135,9 +132,7 @@ feature 'User Sign Up and Log In' do
     click_link 'Log In'
     click_button 'Log In'
 
-    expect(page).to have_current_path(new_user_session_path)
-    expect(page).to have_content 'Email cannot be blank'
-    expect(page).to_not have_content 'Password cannot be blank'
+    expect(page).to have_content 'Sorry! Wrong password. Please try again!'
   end
 
   scenario 'user uses email address without an account' do
@@ -146,9 +141,7 @@ feature 'User Sign Up and Log In' do
     fill_in 'Password', with: 'password'
     click_button 'Log In'
 
-    expect(page).to have_current_path(new_user_session_path)
-    expect(page).to have_content 'We could not find your email!'
-    expect(page).to have_content "Please reenter or create an account."
+    expect(page).to have_content 'We don\'t have an account with that email! Please re-enter or sign up.'
   end
 
   scenario 'user enters incorrect password' do
@@ -158,7 +151,6 @@ feature 'User Sign Up and Log In' do
     fill_in 'Password', with: 'incorrectpassword'
     click_button 'Log In'
 
-    expect(page).to have_current_path(new_user_session_path)
     expect(page).to have_content 'Sorry! Wrong password. Please try again!'
   end
 end
@@ -174,12 +166,9 @@ feature 'User Sign Out' do
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
     click_button 'Log In'
+    click_link 'My Account'
 
-    expect(page).to have_content 'My Account'
-    # Hover over 'My Account'
-    find('My Account').hover
-
-    expect(page).to have_content 'Update Profile'
+    expect(page).to have_content 'Update My Profile'
     expect(page).to have_content 'Current Inventory'
     expect(page).to have_content 'Sign Out'
   end
@@ -190,12 +179,9 @@ feature 'User Sign Out' do
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
     click_button 'Log In'
+    click_link 'My Account'
 
-    expect(page).to have_content 'My Account'
-    # Hover over 'My Account'
-    find('My Account').hover
-
-    expect(page).to have_content 'Update Profile'
+    expect(page).to have_content 'Update My Profile'
     expect(page).to have_content 'View Pickups'
     expect(page).to have_content 'Sign Out'
   end
@@ -206,9 +192,7 @@ feature 'User Sign Out' do
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
     click_button 'Log In'
-
-    # Hover over 'My Account'
-    find('My Account').hover
+    click_link 'My Account'
     click_link 'Sign Out'
 
     expect(page).to have_content 'You have signed out successfully'
