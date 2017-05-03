@@ -26,6 +26,13 @@ class User < ApplicationRecord
   def shelter?
     self.type == 'Shelter'
   end
+
+  has_many :inventories
+  has_many :comments
+  has_many :stores, through: :store_pickups, source: :store
+  has_many :store_pickups, foreign_key: :shelter_id, class_name: 'User'
+  has_many :shelters, through: :shelter_pickups, source: :shelter
+  has_many :shelter_pickups, foreign_key: :store_id, class_name: 'User'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
