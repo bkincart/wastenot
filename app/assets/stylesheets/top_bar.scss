@@ -1,0 +1,99 @@
+$orange: #e39219;
+$green: #82c13f;
+$black: #000000;
+$white: #ffffff;
+$shadow-grey: rgba(#888888, 0.65);
+
+a:hover {
+  color: $green;
+}
+
+.green-text {
+  color: $green;
+  a {
+    color: $green;
+  }
+}
+
+.black-text {
+  color: $black;
+  a {
+    color: $black;
+  }
+}
+
+.top-bar, .top-bar ul {
+  background-color: $white;
+}
+
+.top-bar {
+  border-bottom: 3px solid $black;
+
+  .title {
+    padding: 0px;
+
+    a {
+      font-size: 2em;
+    }
+  }
+
+  .top-bar-right {
+    a{
+      font-size: 1.2em;
+    }
+  }
+}
+
+// All below CSS is for search button
+* {
+  box-sizing: border-box;
+}
+
+.search-wrapper {
+  position: relative;
+  background: $green;
+  border-radius: 20px;
+  transform-origin: 100% 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: 250ms ease;
+
+  &.focused {
+    width: 250px;
+
+    .search-input {
+      padding: 0 0px 0 13px;
+      width: 100%;
+      transform: scale(1);
+      margin-right: 0px;
+    }
+  }
+
+  .search-input {
+    background: transparent;
+    border: 0;
+    color: $white;
+    outline: none;
+    height: 40px;
+    width: 100%;
+    overflow: hidden;
+    font-weight: 450;
+    transform: scale(0);
+    transform-origin: 0 50%;
+    transition: 275ms ease;
+
+    &::placeholder {
+      color: #cccccc;
+    }
+  }
+
+  i {
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    top: 50%;
+    right: 13px;
+    transform: translateY(-50%);
+  }
+}

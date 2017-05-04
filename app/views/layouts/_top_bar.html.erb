@@ -1,0 +1,38 @@
+<%= stylesheet_link_tag "top_bar", media: "all" %>
+
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="menu">
+      <li class="menu-text title"> <a href='/'><span class='green-text'>Waste</span><span class='black-text'>Not</span></a> </li>
+      <li>
+        <form>
+          <div class="search-wrapper">
+            <input class="search-input" type="text" placeholder="Search Today's Inventory"/><i class="fa fa-search" aria-hidden="true"></i>
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <% if user_signed_in? %>
+        <li>
+          <a href="#" class='black-text'>My Account</a>
+          <ul class="menu vertical">
+            <li><a href="#" class='black-text'> Update My Profile </a></li>
+            <% if current_user.store? %>
+              <li><a href="#" class='black-text'> Current Inventory </a></li>
+            <% else %>
+              <li><a href="#" class='black-text'> View Pickups </a></li>
+            <% end %>
+            <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete,  class: 'black-text' %> </li>
+        </ul>
+      <% else %>
+        <li> <a href='/users/sign_up'><span class='black-text'>Sign</span><span class='green-text'> Up</span></a> </li>
+        <li> <a href='/users/sign_in'><span class='black-text'>Log</span><span class='green-text'> In</span></a> </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<%= javascript_include_tag 'top_bar' %>

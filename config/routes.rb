@@ -2,5 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
 
-  resources :pickups
+  namespace :api do
+    namespace :v1 do
+      resources :inventories
+    end
+  end
+
+  get '*path', to: 'home#index'
 end

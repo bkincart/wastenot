@@ -1,0 +1,61 @@
+$orange: #e39219;
+$green: #82c13f;
+$black: #000000;
+$shadow-grey: rgba(#888888, 0.65);
+
+.inv-label {
+  width: 60%;
+  height: 3em;
+  text-align: center;
+  position: relative;
+  margin: auto;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  box-shadow: 3px 3px 0px $shadow-grey;
+
+  p {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    margin: auto;
+  }
+}
+
+.orange {
+  background-color: $orange;
+}
+
+.green {
+  background-color: $green;
+}
+
+.comments {
+  margin-top: 5em;
+  text-align: center;
+
+  h1 {
+    font-size: 2em;
+    padding: 0px 10px;
+    border: 2px solid $green;
+    width: 30%;
+    margin: auto;
+    box-shadow: 3px 3px 0px $shadow-grey;
+  }
+
+}
+
+.comment_tile {
+  border: 3px solid $green;
+  box-shadow: 3px 3px 0px $shadow-grey;
+  margin-top: 15px;
+
+  h2 {
+    font-size: 1.5em;
+    // background-color: $shadow-grey;
+    margin-top: 10px;
+  }
+}
