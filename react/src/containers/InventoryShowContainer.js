@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Label from '../components/Label'
-import CommentTile from '../components/CommentTile'
+import Label from '../components/Label';
+import CommentTile from '../components/CommentTile';
 
 class InventoryShowContainer extends Component {
   constructor(props) {
@@ -24,6 +24,7 @@ class InventoryShowContainer extends Component {
   }
 
   componentDidMount() {
+    $(function(){ $(document).foundation(); });
     let inventoryId = this.props.params.id;
     fetch(`/api/v1/inventories/${inventoryId}`)
     .then(response => {

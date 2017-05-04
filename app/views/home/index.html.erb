@@ -1,3 +1,30 @@
-<div class='landing-photo' />
+<div class='landing-photo'>
+  <img data-interchange="[ <%= asset_path('small1000w.jpg') %>, small], [ <%= asset_path('medium2500w.jpg') %>, medium], [ <%= asset_path('medium2500w.jpg') %>, large]" />
+</div>
 
-</div><div id='app' />
+<div class='row info-tiles align-spaced'>
+  <div class="card info-tile text-center small-centered" style="width: 300px;">
+    <div class="card-section">
+      <h1><span class='green-text'>Waste</span> <span class='black-text'>Not</span></h1>
+      <hr />
+      <h2>Show your Available Inventory</h2>
+      <%= button_to "Stores", stores_path, class: 'button info-button' %>
+    </div>
+  </div>
+  <div class="card info-tile text-center small-centered" style="width: 300px;">
+    <div class="card-section">
+      <h1><span class='green-text'>Share</span></h1>
+      <hr />
+      <h2>Share <br/>your <br/> Resources</h2>
+      <%= button_to "See Testimonials", testimonials_path, class: 'button info-button' %>
+    </div>
+  </div>
+  <div class="card info-tile text-center small-centered" style="width: 300px;">
+    <div class="card-section">
+      <h1><span class='green-text'>Want</span> <span class='black-text'>Not</span></h1>
+      <hr />
+      <h2>Schedule Pickups of Available Food</h2>
+      <%= button_to "Shelters", shelters_path, class: 'button info-button' %>
+    </div>
+  </div>
+</div>

@@ -3,8 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory, Router } from 'react-router';
 
-import routes from './routes'
-
+import routes from './routes';
 
 let reactAppRender = (element) => {
   ReactDOM.render(
