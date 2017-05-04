@@ -7,9 +7,17 @@ class HomeContainer extends Component {
 
   }
 
+  componentDidMount () {
+  }
+
   render() {
     return (
-    <Link to={`/inventories/2`}>This is a placeholder link to an inventory page</Link>
+      <div>
+        <div className='landing-photo' />
+        <Link to={`/inventories/2`}>This is a placeholder link to an inventory page</Link>
+        <Link to={`/users/1/current`}>This is a placeholder link to store homepage</Link>
+        <Link to={`/users/3/current`}>This is a placeholder link to an inventory page</Link>
+      </div>
     );
   }
 }
