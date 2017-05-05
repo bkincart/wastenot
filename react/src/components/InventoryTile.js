@@ -22,12 +22,14 @@ class InventoryTile extends Component {
     }
 
     return (
-      <div className='row'>
+      <div className='row inventory-tile-container align-center'>
           <div className={"small-10 small-centered columns inventory-tile " + outline}>
-            <h2> <span className=''>Item:</span> { this.props.item } </h2>
-            <p> Quantity: { this.props.quantity } </p>
-            { measurement_p }
-            { claimed }
+            <a href={"/inventories/" + this.props.id} className='black-text'>
+              <h2> <span className='strong'>Item:</span> { this.props.item } </h2>
+              <p> Quantity: { this.props.quantity } </p>
+              { measurement_p }
+              { claimed }
+              </a>
           </div>
       </div>
     )

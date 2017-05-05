@@ -3,13 +3,9 @@ $green: #82c13f;
 $black: #000000;
 $shadow-grey: rgba(#888888, 0.65);
 
-.green-outline {
-  border: 2px solid $green;
+.pickup-tile {
+  border: 2px solid $black;
 }
-
-.orange-outline {
-  border: 2px solid $orange;
-  }
 
 .claimed {
   width: 25%;
@@ -20,14 +16,10 @@ a .black-text {
   color: black
 }
 
-.inventory-tile-container {
-  margin-top: 2em;
+.pickup-tile-container {
+  margin: 2em;
 }
 
 .strong {
   font-weight: strong
-}
-
-.add-inventory {
-  width: 25%;
 }

@@ -9,13 +9,7 @@ class Api::V1::InventoriesController < ApplicationController
 
   def show
     @inventory = Inventory.find(params[:id])
-    @store = @inventory.user
-    render json:
-      {
-        inventory: @inventory,
-        store: @store,
-        comments: @inventory.comments
-      }
+    render json: @inventory
   end
 
   def new

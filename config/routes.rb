@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
 
-  resources :users do
-    resources :pickups
-    resources :inventories
+  resources :users, only: :show do
+    resources :pickups, only: :index
+    resources :inventories, only: :index
   end
+
+  resources :inventories, only: [:index, :show]
 
   resources :stores, only: :index
   resources :shelters, only: :index
