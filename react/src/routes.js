@@ -1,12 +1,14 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import InventoryShowContainer from './containers/InventoryShowContainer';
-import HomeContainer from './containers/HomeContainer';
+import InventoryIndexContainer from './containers/InventoryIndexContainer';
+import PickupIndexContainer from './containers/PickupIndexContainer';
 
 let routes = (
   <Route path='/'>
-    <IndexRoute component={HomeContainer} />
     <Route path='/inventories/:id' component={InventoryShowContainer} />
+    <Route path='/users/:user_id/inventories' component={InventoryIndexContainer} />
+    <Route path='/users/:user_id/pickups' component={PickupIndexContainer} />
   </Route>
 );
 
