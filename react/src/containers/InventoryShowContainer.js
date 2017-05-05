@@ -24,7 +24,6 @@ class InventoryShowContainer extends Component {
   }
 
   componentDidMount() {
-    $(function(){ $(document).foundation(); });
     let inventoryId = this.props.params.id;
     fetch(`/api/v1/inventories/${inventoryId}`)
     .then(response => {
@@ -62,7 +61,7 @@ class InventoryShowContainer extends Component {
     if (!this.state.available) { claimed = <Label color='green' text='Claimed' /> }
 
     let expired = null
-    if (!this.state.active) {expired = <Label color='orange' text='Expired' /> }
+    if (!this.state.active) { expired = <Label color='orange' text='Expired' /> }
 
     let inventoryComments = this.state.comments.map(comment => {
       return(

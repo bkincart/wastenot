@@ -21,9 +21,9 @@
           <ul class="menu vertical">
             <li><a href="#" class='black-text'> Update My Profile </a></li>
             <% if current_user.store? %>
-              <li><a href="/inventories" class='black-text'> Current Inventory </a></li>
+              <li><a href="/users/<%= current_user.id %>/inventories" class='black-text'> Current Inventory </a></li>
             <% else %>
-              <li><a href="#" class='black-text'> View Pickups </a></li>
+              <li><a href="/users/<%= current_user.id %>/pickups" class='black-text'> View Pickups </a></li>
             <% end %>
             <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete,  class: 'black-text' %> </li>
         </ul>

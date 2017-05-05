@@ -44,7 +44,6 @@ feature 'User Sign Up and Log In' do
     click_button 'Sign Up!'
 
     expect(page).to have_content 'Welcome! You\'ve successfully signed up.'
-    expect(page).to have_current_path(root_path)
     expect(page).to have_content 'My Account'
     expect(page).to_not have_content 'Log In'
     expect(page).to_not have_content 'Log In'
@@ -112,7 +111,7 @@ feature 'User Sign Up and Log In' do
     expect(page).to have_content 'An account already exists for that email address!'
   end
 
-  scenario 'user logs in successfully' do
+  scenario 'user logs in successfully as store' do
     user = FactoryGirl.create(:store)
     visit root_path
     click_link 'Log In'
@@ -121,7 +120,22 @@ feature 'User Sign Up and Log In' do
     click_button 'Log In'
 
     expect(page).to have_content 'You have logged in successfully!'
-    expect(page).to have_current_path(root_path)
+    expect(page).to have_current_path(user_inventories_path(user.id))
+    expect(page).to have_content 'My Account'
+    expect(page).to_not have_content 'Log In'
+    expect(page).to_not have_content 'Sign Up'
+  end
+
+  scenario 'user logs in successfully as shelter' do
+    user = FactoryGirl.create(:shelter)
+    visit root_path
+    click_link 'Log In'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Log In'
+
+    expect(page).to have_content 'You have logged in successfully!'
+    expect(page).to have_current_path(user_pickups_path(user.id))
     expect(page).to have_content 'My Account'
     expect(page).to_not have_content 'Log In'
     expect(page).to_not have_content 'Sign Up'
