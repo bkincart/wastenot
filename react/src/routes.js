@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import InventoryShowContainer from './containers/InventoryShowContainer';
 import InventoryIndexContainer from './containers/InventoryIndexContainer';
 import PickupIndexContainer from './containers/PickupIndexContainer';
-import NewInventoryForm from './containers/NewInventoryForm'
+import NewInventoryForm from './containers/NewInventoryForm';
 
 let routes = (
   <Route path='/'>

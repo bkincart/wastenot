@@ -32,7 +32,6 @@ class PickupIndexContainer extends Component {
 
   render () {
     let pickups = this.state.pickups.map (pickup => {
-      debugger;
       return (
         <PickupTile
           key = {pickup.id}

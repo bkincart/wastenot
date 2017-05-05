@@ -6,7 +6,7 @@ class NewInventoryForm extends Component {
 
     this.state = {
 
-    }
+    };
   }
 
   render () {
