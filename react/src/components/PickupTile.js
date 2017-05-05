@@ -6,10 +6,10 @@ class PickupTile extends Component {
   }
 
   render () {
-    let measurement_p = null;
+    let measurement_p = null
     if(this.props.inventory_measurement) {
       measurement_p = <p> <span className='strong'>Measurement:</span> { this.props.inventory_measurement } </p>
-    };
+    }
     return (
       <div className='row pickup-tile-container'>
           <div className="small-10 small-centered columns pickup-tile">

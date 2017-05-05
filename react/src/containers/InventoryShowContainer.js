@@ -57,16 +57,16 @@ class InventoryShowContainer extends Component {
   }
 
   render() {
-    let claimed = null;
-    if (!this.state.available) { claimed = <Label color='green' text='Claimed' /> };
+    let claimed = null
+    if (!this.state.available) { claimed = <Label color='green' text='Claimed' /> }
 
-    let expired = null;
-    if (!this.state.active) { expired = <Label color='orange' text='Expired' /> };
+    let expired = null
+    if (!this.state.active) { expired = <Label color='orange' text='Expired' /> }
 
-    let measurement_p = null;
+    let measurement_p = null
     if(this.state.measurement) {
       measurement_p = <p> Measurement: { this.state.measurement } </p>
-    };
+    }
 
     let inventoryComments = this.state.comments.map(comment => {
       return(
