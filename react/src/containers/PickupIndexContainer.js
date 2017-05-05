@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PickupTile from '../components/PickupTile'
+import PickupTile from '../components/PickupTile';
 
 class PickupIndexContainer extends Component {
   constructor(props) {
@@ -7,7 +7,7 @@ class PickupIndexContainer extends Component {
 
     this.state = {
       pickups: []
-    }
+    };
   }
 
   componentDidMount () {
@@ -24,19 +24,23 @@ class PickupIndexContainer extends Component {
     .then(response => response.json())
     .then(pickupData => {
       this.setState({
-        pickups: pickupData.pickups
+        pickups: pickupData
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
-
   }
 
   render () {
-    let pickups = this.state.pickups.map (inventory => {
+    let pickups = this.state.pickups.map (pickup => {
       return (
         <PickupTile
           key = {pickup.id}
           id = {pickup.id}
+          store_name = {pickup.store.name}
+          inventory_id = {pickup.inventory.id}
+          inventory_item = {pickup.inventory.item}
+          inventory_measurement = {pickup.inventory.measurement}
+          inventory_quantity = {pickup.inventory.quantity}
         />
       )
     })

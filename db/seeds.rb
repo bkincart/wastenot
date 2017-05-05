@@ -37,7 +37,7 @@ User.create(
 Inventory.create(
   quantity: 3.5,
   measurement: 'trays',
-  item: 'chicken parmigian',
+  item: 'Chicken parmigian',
   available: true,
   active: true,
   user_id: 1
@@ -46,7 +46,7 @@ Inventory.create(
 Inventory.create(
   quantity: 5,
   measurement: 'dozen',
-  item: 'bagels',
+  item: 'Bagels',
   available: false,
   active: false,
   user_id: 1
@@ -55,7 +55,7 @@ Inventory.create(
 Inventory.create(
   quantity: 10,
   measurement: 'pounds',
-  item: 'tomatoes',
+  item: 'Tomatoes',
   available: true,
   active: true,
   user_id: 2

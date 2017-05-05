@@ -38,18 +38,18 @@ class InventoryShowContainer extends Component {
     .then(response => response.json())
     .then(inventoryData => {
       this.setState({
-        quantity: inventoryData.inventory.quantity,
-        measurement: inventoryData.inventory.measurement,
-        item: inventoryData.inventory.item,
-        available: inventoryData.inventory.available,
-        active: inventoryData.inventory.active,
-        user_id: inventoryData.inventory.user_id,
-        store_name: inventoryData.store.name,
-        store_address: inventoryData.store.address,
-        store_city: inventoryData.store.city,
-        store_state: inventoryData.store.state,
-        store_zip: inventoryData.store.zip,
-        store_phone: inventoryData.store.phone,
+        quantity: inventoryData.quantity,
+        measurement: inventoryData.measurement,
+        item: inventoryData.item,
+        available: inventoryData.available,
+        active: inventoryData.active,
+        user_id: inventoryData.user_id,
+        store_name: inventoryData.user.name,
+        store_address: inventoryData.user.address,
+        store_city: inventoryData.user.city,
+        store_state: inventoryData.user.state,
+        store_zip: inventoryData.user.zip,
+        store_phone: inventoryData.user.phone,
         comments: inventoryData.comments
       })
     })
@@ -63,6 +63,11 @@ class InventoryShowContainer extends Component {
     let expired = null
     if (!this.state.active) { expired = <Label color='orange' text='Expired' /> }
 
+    let measurement_p = null
+    if(this.state.measurement) {
+      measurement_p = <p> Measurement: { this.state.measurement } </p>
+    }
+
     let inventoryComments = this.state.comments.map(comment => {
       return(
         <CommentTile
@@ -70,6 +75,7 @@ class InventoryShowContainer extends Component {
           id = {comment.id}
           body = {comment.body}
           user_name = {comment.user_name}
+          timestamp = {comment.updated_at}
         />
       )
     })
@@ -89,6 +95,7 @@ class InventoryShowContainer extends Component {
           <div className='small-centered small-10 medium-5 columns text-center'>
             <p> Item: {this.state.item} </p>
             <p> Quantity: {this.state.quantity} </p>
+            { measurement_p }
             { claimed }
             { expired }
           </div>

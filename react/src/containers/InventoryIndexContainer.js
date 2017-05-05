@@ -47,7 +47,17 @@ class InventoryIndexContainer extends Component {
 
     return(
       <div>
-        <h1>Your Current Inventory</h1>
+      <br/>
+        <div className='row align-middle'>
+          <div className='small-10 medium-5 small-centered columns'>
+            <h1>Your Current Inventory</h1>
+          </div>
+          <div className='small-10 medium-7 small-centered columns'>
+            <a href="/inventories/new">
+              <button className='button add-inventory'> Add Inventory </button>
+            </a>
+          </div>
+        </div>
         { inventories }
       </div>
     )

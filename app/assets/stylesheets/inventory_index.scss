@@ -11,10 +11,23 @@ $shadow-grey: rgba(#888888, 0.65);
   border: 2px solid $orange;
   }
 
-.inner-border {
-}
-
 .claimed {
   width: 25%;
   text-align: center;
+}
+
+a .black-text {
+  color: black
+}
+
+.inventory-tile-container {
+  margin-top: 2em;
+}
+
+.strong {
+  font-weight: strong
+}
+
+.add-inventory {
+  width: 25%;
 }
