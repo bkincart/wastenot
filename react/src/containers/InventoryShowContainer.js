@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Label from '../components/Label';
 import CommentTile from '../components/CommentTile';
+import NewCommentFormContainer from './NewCommentFormContainer';
 
 class InventoryShowContainer extends Component {
   constructor(props) {
@@ -34,9 +35,8 @@ class InventoryShowContainer extends Component {
           error = new Error(errorMessage);
         throw(error);
       }
-    })
-    .then(response => response.json())
-    .then(inventoryData => {
+    }).then(response => response.json()
+    ).then(inventoryData => {
       this.setState({
         quantity: inventoryData.quantity,
         measurement: inventoryData.measurement,
@@ -52,8 +52,7 @@ class InventoryShowContainer extends Component {
         store_phone: inventoryData.user.phone,
         comments: inventoryData.comments
       })
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }).catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render() {
@@ -105,6 +104,7 @@ class InventoryShowContainer extends Component {
             <h1> Comments </h1>
           </div>
         </div>
+        <NewCommentFormContainer />
         { inventoryComments }
         <p> Add a comment button </p>
       </div>

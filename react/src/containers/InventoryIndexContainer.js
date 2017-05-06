@@ -20,15 +20,12 @@ class InventoryIndexContainer extends Component {
           error = new Error(errorMessage);
         throw(error);
       }
-    })
-    .then(response => response.json())
-    .then(inventoryData => {
+    }).then(response => response.json()
+    ).then(inventoryData => {
       this.setState({
         inventories: inventoryData
       })
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
-
+    }).catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render () {

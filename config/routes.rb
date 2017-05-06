@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :inventories
       resources :pickups
       resources :past, only: :index
+      resources :comments
     end
   end
 
