@@ -29,5 +29,14 @@ a .black-text {
 }
 
 .add-inventory {
-  width: 25%;
+  width: 50%;
+  background-color: $green;
+
+  &:hover {
+    background-color: $orange;
+  }
+}
+
+.past-inventory {
+  width: 50%;
 }
