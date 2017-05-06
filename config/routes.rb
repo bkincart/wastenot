@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: :show do
     resources :pickups, only: :index
     resources :inventories, only: :index
+    resources :past, only: :index
   end
 
   resources :inventories, only: [:index, :show]
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :inventories
       resources :pickups
+      resources :past, only: :index
     end
   end
 

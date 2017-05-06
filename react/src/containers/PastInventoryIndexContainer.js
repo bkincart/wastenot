@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import InventoryTile from '../components/InventoryTile'
 
-class InventoryIndexContainer extends Component {
+class PastInventoryIndexContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      inventories: []
+      past_inventories: []
     }
   }
 
   componentDidMount () {
-    fetch(`/api/v1/inventories`, {credentials: 'same-origin'})
+    fetch(`/api/v1/past`, {credentials: 'same-origin'})
     .then(response => {
       if (response.ok) {
         return response;
@@ -22,9 +22,9 @@ class InventoryIndexContainer extends Component {
       }
     })
     .then(response => response.json())
-    .then(inventoryData => {
+    .then(pastInventoryData => {
       this.setState({
-        inventories: inventoryData
+        past_inventories: pastInventoryData
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -32,7 +32,7 @@ class InventoryIndexContainer extends Component {
   }
 
   render () {
-    let inventories = this.state.inventories.map (inventory => {
+    let past_inventories = this.state.past_inventories.map (inventory => {
       return (
         <InventoryTile
           key = {inventory.id}
@@ -50,23 +50,18 @@ class InventoryIndexContainer extends Component {
       <br/>
         <div className='row align-middle'>
           <div className='small-10 medium-5 small-centered columns'>
-            <h1>Your Current Inventory</h1>
+            <h1>Your Past Inventory</h1>
           </div>
-          <div className='small-10 medium-3 small-centered columns'>
-            <a href="/inventories/new">
-              <button className='button add-inventory'> Add New Inventory </button>
-            </a>
-          </div>
-          <div className='small-10 medium-3 small-centered columns'>
-            <a href={"/users/" + this.props.params.user_id + "/past"}>
-              <button className='button past-inventory'> View Past Inventory </button>
+          <div className='small-10 medium-4 small-centered columns'>
+            <a href={"/users/" + this.props.params.user_id + "/inventories"}>
+              <button className='button past-inventory'> Back to Current Inventory </button>
             </a>
           </div>
         </div>
-        { inventories }
+        { past_inventories }
       </div>
     )
   }
 }
 
-export default InventoryIndexContainer;
+export default PastInventoryIndexContainer;
