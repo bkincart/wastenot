@@ -100,13 +100,14 @@ class InventoryShowContainer extends Component {
           </div>
         </div>
         <div className='row'>
-          <div className='small-centered small-10 medium-8 columns comments'>
+          <div className='small-centered small-10 columns comments'>
             <h1> Comments </h1>
           </div>
         </div>
-        <NewCommentFormContainer />
+        <NewCommentFormContainer
+          inventory_id = {this.props.params.id}
+        />
         { inventoryComments }
-        <p> Add a comment button </p>
       </div>
     );
   }

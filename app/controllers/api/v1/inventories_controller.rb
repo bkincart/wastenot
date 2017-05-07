@@ -13,6 +13,7 @@ class Api::V1::InventoriesController < ApplicationController
   end
 
   def create
+    @current_user = current_user
     body = request.body.read
     parsed = JSON.parse(body)
     parsed["item"] = parsed["item"].gsub(/^([a-z])/) { $1.capitalize }
@@ -20,7 +21,7 @@ class Api::V1::InventoriesController < ApplicationController
     inventory = Inventory.new(parsed)
     inventory.user = current_user
     if inventory.save
-      render json: { messages: 'You succeeded!'}
+      render json: { messages: 'Success', current_user: @current_user }
     else
       render json: { messages: inventory.errors.full_messages }
     end

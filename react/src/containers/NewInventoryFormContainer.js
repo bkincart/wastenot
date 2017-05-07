@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 import InputField from '../components/InputField';
 
 class NewInventoryFormContainer extends Component {
@@ -9,7 +10,8 @@ class NewInventoryFormContainer extends Component {
       item: '',
       quantity: '',
       measurement: '',
-      messages: []
+      messages: [],
+      current_user: null
     };
 
     this.handleItemChange = this.handleItemChange.bind(this);
@@ -45,7 +47,13 @@ class NewInventoryFormContainer extends Component {
       let parsed = response.json()
       return parsed
     }).then(message => {
-      this.setState({ messages: message.messages })
+      this.setState({
+        messages: message.messages,
+        current_user: message.current_user
+      })
+      if(message.messages == 'Success') {
+        browserHistory.push(`/users/${message.current_user.id}/inventories`);
+      }
     })
   }
 

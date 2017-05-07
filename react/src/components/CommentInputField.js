@@ -16,8 +16,8 @@ const CommentInputField = props => {
   }
 
   return (
-    <div className='input'>
-      <textarea placeholder={props.placeholder} value={props.value} onChange={props.onChange} />
+    <div className='comment-input'>
+      <input type='text' placeholder={props.placeholder} value={props.value} onChange={props.onChange} />
       <p>{error_message}</p>
     </div>
   )
