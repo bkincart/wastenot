@@ -20,14 +20,12 @@ class PastInventoryIndexContainer extends Component {
           error = new Error(errorMessage);
         throw(error);
       }
-    })
-    .then(response => response.json())
-    .then(pastInventoryData => {
+    }).then(response => response.json()
+    ).then(pastInventoryData => {
       this.setState({
         past_inventories: pastInventoryData
       })
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }).catch(error => console.error(`Error in fetch: ${error.message}`));
 
   }
 

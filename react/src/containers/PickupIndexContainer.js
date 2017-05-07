@@ -20,14 +20,12 @@ class PickupIndexContainer extends Component {
           error = new Error(errorMessage);
         throw(error);
       }
-    })
-    .then(response => response.json())
-    .then(pickupData => {
+    }).then(response => response.json()
+    ).then(pickupData => {
       this.setState({
         pickups: pickupData
       })
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }).catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render () {

@@ -35,15 +35,15 @@ $shadow-grey: rgba(#888888, 0.65);
 
 .comments {
   margin-top: 5em;
-  text-align: center;
+  // text-align: center;
 
   h1 {
     font-size: 2em;
-    padding: 0px 10px;
-    border: 2px solid $green;
-    width: 30%;
-    margin: auto;
-    box-shadow: 3px 3px 0px $shadow-grey;
+    padding: 0px;
+  //   border: 2px solid $green;
+  //   width: 30%;
+  //   margin: auto;
+  //   box-shadow: 3px 3px 0px $shadow-grey;
   }
 
 }

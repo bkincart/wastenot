@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Label from '../components/Label';
-import CommentTile from '../components/CommentTile';
+import CommentsContainer from './CommentsContainer';
 
 class InventoryShowContainer extends Component {
   constructor(props) {
@@ -34,9 +34,8 @@ class InventoryShowContainer extends Component {
           error = new Error(errorMessage);
         throw(error);
       }
-    })
-    .then(response => response.json())
-    .then(inventoryData => {
+    }).then(response => response.json()
+    ).then(inventoryData => {
       this.setState({
         quantity: inventoryData.quantity,
         measurement: inventoryData.measurement,
@@ -52,8 +51,7 @@ class InventoryShowContainer extends Component {
         store_phone: inventoryData.user.phone,
         comments: inventoryData.comments
       })
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }).catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render() {
@@ -68,17 +66,7 @@ class InventoryShowContainer extends Component {
       measurement_p = <p> Measurement: { this.state.measurement } </p>
     }
 
-    let inventoryComments = this.state.comments.map(comment => {
-      return(
-        <CommentTile
-          key = {comment.id}
-          id = {comment.id}
-          body = {comment.body}
-          user_name = {comment.user_name}
-          timestamp = {comment.updated_at}
-        />
-      )
-    })
+    debugger;
 
     return (
       <div>
@@ -100,13 +88,10 @@ class InventoryShowContainer extends Component {
             { expired }
           </div>
         </div>
-        <div className='row'>
-          <div className='small-centered small-10 medium-8 columns comments'>
-            <h1> Comments </h1>
-          </div>
-        </div>
-        { inventoryComments }
-        <p> Add a comment button </p>
+        <CommentsContainer
+          comments={this.state.comments}
+          inventory_id = {this.props.params.id}
+        />
       </div>
     );
   }
