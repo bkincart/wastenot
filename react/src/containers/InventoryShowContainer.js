@@ -76,12 +76,12 @@ class InventoryShowContainer extends Component {
     }
     fetch(`/api/v1/comments/${comment.id}`, { method: 'DELETE', body: JSON.stringify(requestBody), credentials: 'same-origin' })
     .then(response => {
-      let parsed = response.json()
-      return parsed
+      let parsed = response.json();
+      return parsed;
     }).then(message => {
       if(message.message == 'Success') {
         // Filter is not working for some reason??
-        const newCommentAry = []
+        const newCommentAry = [];
         for (const existingComment of this.state.comments) {
           if(existingComment !== deletedComment) {
             newCommentAry.push(existingComment);
@@ -89,9 +89,9 @@ class InventoryShowContainer extends Component {
         }
         this.setState({
           comments: newCommentAry
-        })
+        });
       }
-    })
+    });
   }
 
   componentDidMount() {
