@@ -5,6 +5,7 @@ import InventoryIndexContainer from './containers/InventoryIndexContainer';
 import PastInventoryIndexContainer from './containers/PastInventoryIndexContainer';
 import PickupIndexContainer from './containers/PickupIndexContainer';
 import NewInventoryFormContainer from './containers/NewInventoryFormContainer';
+import EditCommentContainer from './containers/EditCommentContainer';
 
 let routes = (
   <Route path='/'>
@@ -13,6 +14,7 @@ let routes = (
     <Route path='/users/:user_id/inventories' component={InventoryIndexContainer} />
     <Route path='/users/:user_id/past' component={PastInventoryIndexContainer} />
     <Route path='/users/:user_id/pickups' component={PickupIndexContainer} />
+    <Route path='/comments/:id/edit' component={EditCommentContainer} />
   </Route>
 );
 

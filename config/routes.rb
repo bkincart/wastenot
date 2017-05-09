@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :stores, only: :index
   resources :shelters, only: :index
   resources :testimonials, only: :index
+  resources :comments, only: [:edit, :destroy]
 
   namespace :api do
     namespace :v1 do

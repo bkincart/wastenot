@@ -94,13 +94,13 @@ Pickup.create(
 Comment.create(
   body: 'Are the bagels stale?',
   user_id: 3,
-  inventory_id: 2,
+  inventory_id: 4,
   user_name: 'Rosie\'s Place'
 )
 
 Comment.create(
   body: 'No, they probably have another day in them!',
   user_id: 1,
-  inventory_id: 2,
+  inventory_id: 4,
   user_name: 'Star Market'
 )
