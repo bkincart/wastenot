@@ -3,4 +3,5 @@ class Api::V1::InventorySerializer < ActiveModel::Serializer
 
   belongs_to :user
   has_many :comments
+  belongs_to :pickup
 end

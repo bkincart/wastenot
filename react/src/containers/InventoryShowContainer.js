@@ -21,6 +21,7 @@ class InventoryShowContainer extends Component {
       store_zip: '',
       store_phone: '',
       comments: [],
+      pickups: [],
       newComment: '',
       messages: [],
       current_user: null
@@ -30,6 +31,7 @@ class InventoryShowContainer extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleClaimClick = this.handleClaimClick.bind(this);
   }
 
   handleChange (event) {
@@ -46,7 +48,6 @@ class InventoryShowContainer extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
     let requestBody = {
       body: this.state.newComment,
       inventory_id: this.props.params.id
@@ -80,7 +81,7 @@ class InventoryShowContainer extends Component {
       return parsed;
     }).then(message => {
       if(message.message == 'Success') {
-        // Filter is not working for some reason??
+        // .filter is not working for some reason??
         const newCommentAry = [];
         for (const existingComment of this.state.comments) {
           if(existingComment !== deletedComment) {
@@ -92,6 +93,24 @@ class InventoryShowContainer extends Component {
         });
       }
     });
+  }
+
+  handleClaimClick() {
+    event.preventDefault()
+    let inventoryId = this.props.params.id;
+    let requestBody = {
+      id: inventoryId
+    }
+    fetch(`/api/v1/inventories/${inventoryId}`, { method: 'PUT', body: JSON.stringify(requestBody), credentials: 'same-origin' })
+    .then(response => {
+      let parsed = response.json()
+      return parsed
+    }).then(message => {
+      if(message.messages == 'Success') {
+        debugger;
+        this.setState({ available: message.new_availability })
+      }
+    })
   }
 
   componentDidMount() {
@@ -120,7 +139,8 @@ class InventoryShowContainer extends Component {
         store_state: inventoryData.user.state,
         store_zip: inventoryData.user.zip,
         store_phone: inventoryData.user.phone,
-        comments: inventoryData.comments
+        comments: inventoryData.comments,
+        pickups: inventoryData.pickups
       })
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
     fetch(`/api/v1/comments`, {credentials: 'same-origin'})
@@ -138,9 +158,27 @@ class InventoryShowContainer extends Component {
         current_user: userData.current_user
       })
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
+    fetch(`api/v1/pickups`, {credentials: 'same-origin'})
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    }).then(response => response.json()
+  ).then(pickupData => {
+    
+  })
   }
 
   render() {
+    let claimButton = null
+    // Make claim button appear if inventory is available and active and user is a shelter
+    if (this.state.available && this.state.active && this.state.current_user.type=='Shelter') { claimButton = <button className='button' onClick={this.handleClaimClick}>Claim this Inventory</button> }
+    // Make unclaim button appear if inventory is active but not available and it was claimed by the current user
+    if (!this.state.available && this.state.active  && this.state.current_user==this.state.pickup) {}
 
     let claimed = null
     if (!this.state.available) { claimed = <Label color='green' text='Claimed' /> }
@@ -156,6 +194,7 @@ class InventoryShowContainer extends Component {
     let inventoryComments = this.state.comments.map(comment => {
       return(
         <CommentTile
+          key = {comment.id}
           comment = {comment}
           current_user={this.state.current_user}
           handleDelete={this.handleDelete}
@@ -179,6 +218,7 @@ class InventoryShowContainer extends Component {
             <p> Item: {this.state.item} </p>
             <p> Quantity: {this.state.quantity} </p>
             { measurement_p }
+            { claimButton }
             { claimed }
             { expired }
           </div>

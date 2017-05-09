@@ -27,4 +27,16 @@ class Api::V1::InventoriesController < ApplicationController
       render json: { messages: inventory.errors.full_messages }
     end
   end
+
+  def update
+    body = request.body.read
+    parsed = JSON.parse(body)
+    inventory = Inventory.find(parsed['id'])
+    inventory.available = !inventory.available
+    if inventory.save
+      render json: { messages: 'Success', new_availability: inventory.available }
+    else
+      render json: { messages: 'Failure' }
+    end
+  end
 end
