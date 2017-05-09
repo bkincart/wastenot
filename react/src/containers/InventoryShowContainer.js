@@ -66,8 +66,6 @@ class InventoryShowContainer extends Component {
       measurement_p = <p> Measurement: { this.state.measurement } </p>
     }
 
-    debugger;
-
     return (
       <div>
         <div className='row align-middle'>

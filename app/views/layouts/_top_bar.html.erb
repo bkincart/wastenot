@@ -5,9 +5,10 @@
     <ul class="menu">
       <li class="menu-text title"> <a href='/'><span class='green-text'>Waste</span><span class='black-text'>Not</span></a> </li>
       <li>
-        <form>
+        <form id='search-form' action='/inventories' accept-charset='UTF-8' method='get'>
           <div class="search-wrapper">
-            <input class="search-input" type="text" placeholder="Search Today's Inventory"/><i class="fa fa-search" aria-hidden="true"></i>
+            <input type="text" name='search' id='search' class="search-input" placeholder="Search Today's Inventory"/>
+            <i class="fa fa-search submit" aria-hidden="true"></i>
           </div>
         </form>
       </li>

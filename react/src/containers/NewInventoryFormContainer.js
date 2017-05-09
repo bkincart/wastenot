@@ -21,18 +21,18 @@ class NewInventoryFormContainer extends Component {
   }
 
   handleItemChange(event) {
-    let newItem = event.target.value
-    this.setState({ item: newItem })
+    let newItem = event.target.value;
+    this.setState({ item: newItem });
   }
 
   handleQuantityChange(event) {
-    let newQuantity = event.target.value
-    this.setState({ quantity: newQuantity })
+    let newQuantity = event.target.value;
+    this.setState({ quantity: newQuantity });
   }
 
   handleMeasurementChange(event) {
-    let newMeasurement = event.target.value
-    this.setState({ measurement: newMeasurement })
+    let newMeasurement = event.target.value;
+    this.setState({ measurement: newMeasurement });
   }
 
   handleSubmit(event) {
@@ -44,17 +44,17 @@ class NewInventoryFormContainer extends Component {
     }
     fetch('/api/v1/inventories', { method: 'POST', body: JSON.stringify(requestBody), credentials: 'same-origin' })
     .then(response => {
-      let parsed = response.json()
-      return parsed
+      let parsed = response.json();
+      return parsed;
     }).then(message => {
       this.setState({
         messages: message.messages,
         current_user: message.current_user
-      })
+      });
       if(message.messages == 'Success') {
         browserHistory.push(`/users/${message.current_user.id}/inventories`);
       }
-    })
+    });
   }
 
   render () {

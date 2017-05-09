@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CommentTile from '../components/CommentTile';
-import CommentInputField from '../components/CommentInputField'
+import CommentInputField from '../components/CommentInputField';
+import { browserHistory } from 'react-router';
 
 class CommentsContainer extends Component {
   constructor(props) {
@@ -8,12 +9,31 @@ class CommentsContainer extends Component {
 
     this.state = {
       newComment: '',
-      messages: []
+      messages: [],
+      current_user: null
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete(id) {
+    let requestBody = {
+      id: id,
+      inventory_id: this.props.inventory_id
+    }
+    fetch(`/api/v1/comments/${id}`, { method: 'DELETE', body: JSON.stringify(requestBody), credentials: 'same-origin' })
+    .then(response => {
+      let parsed = response.json()
+      return parsed
+    }).then(message => {
+      if(message.message == 'Success') {
+        debugger;
+        browserHistory.push(`/inventories/${this.props.inventory_id}`);
+      }
+    })
   }
 
   handleChange (event) {
@@ -30,7 +50,7 @@ class CommentsContainer extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
     let requestBody = {
       body: this.state.newComment,
       inventory_id: this.props.inventory_id
@@ -47,6 +67,25 @@ class CommentsContainer extends Component {
     this.handleClearForm(event);
   }
 
+  componentDidMount () {
+    debugger;
+    fetch(`/api/v1/comments`, {credentials: 'same-origin'})
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    }).then(response => response.json()
+  ).then(userData => {
+      this.setState({
+        current_user: userData.current_user
+      })
+    }).catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   render() {
     let inventoryComments = this.props.comments.map(comment => {
       return(
@@ -56,6 +95,9 @@ class CommentsContainer extends Component {
           body = {comment.body}
           user_name = {comment.user_name}
           timestamp = {comment.updated_at}
+          user_id = {comment.user_id}
+          current_user={this.state.current_user}
+          handleDelete={this.handleDelete}
         />
       )
     })
@@ -85,9 +127,5 @@ class CommentsContainer extends Component {
     )
   }
 }
-
-
-
-
 
 export default CommentsContainer;
