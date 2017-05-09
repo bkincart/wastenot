@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Label from '../components/Label';
-import CommentsContainer from './CommentsContainer';
+import CommentTile from '../components/CommentTile';
+import CommentInputField from '../components/CommentInputField';
 
 class InventoryShowContainer extends Component {
   constructor(props) {
@@ -19,8 +20,78 @@ class InventoryShowContainer extends Component {
       store_state: '',
       store_zip: '',
       store_phone: '',
-      comments: []
+      comments: [],
+      newComment: '',
+      messages: [],
+      current_user: null
     }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClearForm = this.handleClearForm.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleChange (event) {
+    let newComment = event.target.value;
+    this.setState ({ newComment: newComment })
+  };
+
+  handleClearForm() {
+    this.setState({
+      newComment: '',
+      messages: []
+    })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    let requestBody = {
+      body: this.state.newComment,
+      inventory_id: this.props.params.id
+    }
+    fetch('/api/v1/comments', { method: 'POST', body: JSON.stringify(requestBody), credentials: 'same-origin' })
+    .then(response => {
+      let parsed = response.json()
+      return parsed
+    }).then(message => {
+      this.setState({
+        messages: message.messages,
+      })
+      if(message.comment) {
+        this.setState({
+          comments: [...this.state.comments, message.comment]
+        })
+      }
+    })
+    this.handleClearForm();
+  }
+
+  handleDelete(comment) {
+    const deletedComment = comment;
+    let requestBody = {
+      id: comment.id,
+      inventory_id: this.props.params.id
+    }
+    fetch(`/api/v1/comments/${comment.id}`, { method: 'DELETE', body: JSON.stringify(requestBody), credentials: 'same-origin' })
+    .then(response => {
+      let parsed = response.json()
+      return parsed
+    }).then(message => {
+      if(message.message == 'Success') {
+        // Filter is not working for some reason??
+        const newCommentAry = []
+        for (const existingComment of this.state.comments) {
+          if(existingComment !== deletedComment) {
+            newCommentAry.push(existingComment);
+          }
+        }
+        this.setState({
+          comments: newCommentAry
+        })
+      }
+    })
   }
 
   componentDidMount() {
@@ -52,9 +123,25 @@ class InventoryShowContainer extends Component {
         comments: inventoryData.comments
       })
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
+    fetch(`/api/v1/comments`, {credentials: 'same-origin'})
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw(error);
+      }
+    }).then(response => response.json()
+    ).then(userData => {
+      this.setState({
+        current_user: userData.current_user
+      })
+    }).catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render() {
+
     let claimed = null
     if (!this.state.available) { claimed = <Label color='green' text='Claimed' /> }
 
@@ -65,6 +152,16 @@ class InventoryShowContainer extends Component {
     if(this.state.measurement) {
       measurement_p = <p> Measurement: { this.state.measurement } </p>
     }
+
+    let inventoryComments = this.state.comments.map(comment => {
+      return(
+        <CommentTile
+          comment = {comment}
+          current_user={this.state.current_user}
+          handleDelete={this.handleDelete}
+        />
+      )
+    })
 
     return (
       <div>
@@ -86,10 +183,27 @@ class InventoryShowContainer extends Component {
             { expired }
           </div>
         </div>
-        <CommentsContainer
-          comments={this.state.comments}
-          inventory_id = {this.props.params.id}
-        />
+        <div className='comments-container'>
+          <div className='row'>
+            <div className='small-centered small-10 columns comments'>
+              <h1> Comments </h1>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='small-centered small-10 columns'>
+              <form onSubmit={this.handleSubmit}>
+                <CommentInputField
+                  label = 'Body'
+                  placeholder='Add a comment here (hit Enter to submit)'
+                  value={this.state.newComment}
+                  onChange={this.handleChange}
+                  errors={this.state.messages}
+                />
+              </form>
+            </div>
+          </div>
+          { inventoryComments }
+        </div>
       </div>
     );
   }
