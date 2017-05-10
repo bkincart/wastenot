@@ -47,9 +47,10 @@ Inventory.create(
   quantity: 5,
   measurement: 'Gallons',
   item: 'Milk',
-  available: true,
+  available: false,
   active: false,
-  user_id: 1
+  user_id: 1,
+  pickup_id: 2
 )
 
 Inventory.create(
@@ -58,7 +59,8 @@ Inventory.create(
   item: 'Pretzels',
   available: false,
   active: false,
-  user_id: 1
+  user_id: 1,
+  pickup_id: 1
 )
 
 Inventory.create(

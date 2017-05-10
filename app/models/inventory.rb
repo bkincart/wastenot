@@ -6,7 +6,7 @@ class Inventory < ApplicationRecord
 
   belongs_to :user
   has_many :comments
-  has_many :pickups
+  belongs_to :pickup, optional: true
 
   def self.search(search)
     where("item ILIKE ?", "%#{search}%")

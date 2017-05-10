@@ -21,15 +21,19 @@ class InventoryShowContainer extends Component {
       store_zip: '',
       store_phone: '',
       comments: [],
+      pickup: null,
       newComment: '',
       messages: [],
-      current_user: null
+      current_user: null,
+      current_user_type: null
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleClaimClick = this.handleClaimClick.bind(this);
+    this.handleUnclaimClick = this.handleUnclaimClick.bind(this);
   }
 
   handleChange (event) {
@@ -46,7 +50,6 @@ class InventoryShowContainer extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
     let requestBody = {
       body: this.state.newComment,
       inventory_id: this.props.params.id
@@ -80,7 +83,7 @@ class InventoryShowContainer extends Component {
       return parsed;
     }).then(message => {
       if(message.message == 'Success') {
-        // Filter is not working for some reason??
+        // .filter is not working for some reason??
         const newCommentAry = [];
         for (const existingComment of this.state.comments) {
           if(existingComment !== deletedComment) {
@@ -93,6 +96,49 @@ class InventoryShowContainer extends Component {
       }
     });
   }
+
+  handleClaimClick() {
+    // Creates a pickup for this inventory and updates the inventory item and state
+    let requestBody = {
+      shelter_id: this.state.current_user.id,
+      store_id: this.state.user_id,
+      inventory_id: this.props.params.id
+    };
+    fetch('/api/v1/pickups', { method: 'POST', body: JSON.stringify(requestBody), credentials: 'same-origin' })
+    .then(response => {
+      let parsed = response.json();
+      return parsed;
+    }).then(message => {
+      if(message.messages=='Success') {
+        this.setState({
+          pickup: message.pickup,
+          available: false
+        });
+      }
+    });
+  }
+
+
+  handleUnclaimClick() {
+    // Hands over pickup id and deletes pickup, resets inventory columns
+    let pickupId = this.state.pickup.id;
+    let requestBody = {
+      pickup_id: pickupId
+    };
+    fetch(`/api/v1/pickups/${pickupId}`, { method: 'DELETE', body: JSON.stringify(requestBody), credentials: 'same-origin' })
+    .then(response => {
+      let parsed = response.json();
+      return parsed;
+    }).then(message => {
+      if(message.message == 'Success') {
+        this.setState({
+          pickup: null,
+          available: true
+        });
+      }
+    });
+  }
+
 
   componentDidMount() {
     let inventoryId = this.props.params.id;
@@ -120,10 +166,11 @@ class InventoryShowContainer extends Component {
         store_state: inventoryData.user.state,
         store_zip: inventoryData.user.zip,
         store_phone: inventoryData.user.phone,
-        comments: inventoryData.comments
+        comments: inventoryData.comments,
+        pickup: inventoryData.pickup
       })
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
-    fetch(`/api/v1/comments`, {credentials: 'same-origin'})
+    fetch(`/api/v1/currentuser`, {credentials: 'same-origin'})
     .then(response => {
       if (response.ok) {
         return response;
@@ -135,12 +182,18 @@ class InventoryShowContainer extends Component {
     }).then(response => response.json()
     ).then(userData => {
       this.setState({
-        current_user: userData.current_user
+        current_user: userData.current_user,
+        current_user_type: userData.current_user_type
       })
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render() {
+    let claimButton = null
+    // Make claim button appear if inventory is available and active and user is a shelter
+    if (this.state.available && this.state.active && this.state.current_user_type=='Shelter') { claimButton = <button className='button' onClick={this.handleClaimClick}>Claim this Inventory</button> }
+    // Make unclaim button appear if inventory is active but not available and it was claimed by the current user
+    if (!this.state.available && this.state.active && this.state.current_user.id==this.state.pickup.shelter_id) { claimButton = <button className='button' onClick={this.handleUnclaimClick}>Unclaim this Inventory</button> }
 
     let claimed = null
     if (!this.state.available) { claimed = <Label color='green' text='Claimed' /> }
@@ -156,6 +209,7 @@ class InventoryShowContainer extends Component {
     let inventoryComments = this.state.comments.map(comment => {
       return(
         <CommentTile
+          key = {comment.id}
           comment = {comment}
           current_user={this.state.current_user}
           handleDelete={this.handleDelete}
@@ -179,6 +233,7 @@ class InventoryShowContainer extends Component {
             <p> Item: {this.state.item} </p>
             <p> Quantity: {this.state.quantity} </p>
             { measurement_p }
+            { claimButton }
             { claimed }
             { expired }
           </div>

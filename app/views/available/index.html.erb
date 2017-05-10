@@ -1,0 +1,16 @@
+<div class='topbar-border'></div>
+
+<h1>Available Inventory</h1>
+<% @available_inventories.each do |inventory| %>
+  <div class='row inventory-tile-container align-center'>
+    <div class="small-10 small-centered columns inventory-tile green-outline">
+      <a href="/inventories/<%= inventory.id %>" class='black-text'>
+        <h2> <span class='strong'>Item:</span> <%= inventory.item %> </h2>
+        <p> Quantity: <%= inventory.quantity %> </p>
+        <% if inventory.measurement %>
+          <p> Measurement: <%= inventory.measurement %> </p>
+        <% end %>
+      </a>
+    </div>
+  </div>
+<% end %>
