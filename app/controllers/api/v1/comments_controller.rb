@@ -16,7 +16,6 @@ class Api::V1::CommentsController < ApplicationController
     if @comment.save
       @comment.viewtime = @comment.updated_at.strftime('%b %d, %Y at %I:%M %p')
       @comment.save
-      binding.pry
       render json: { messages: 'Success', comment: @comment }
     else
       render json: { messages: @comment.errors.full_messages }
