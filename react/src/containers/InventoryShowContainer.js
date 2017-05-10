@@ -196,7 +196,7 @@ class InventoryShowContainer extends Component {
       claimButton = <button className='button' onClick={this.handleClaimClick}>Claim this Inventory</button>
     }
     // Make unclaim button appear if inventory is active but not available and it was claimed by the current user
-    if(this.state.current_user) {
+    if(this.state.current_user && this.state.pickup.shelter_id) {
       if (!this.state.available && this.state.active && this.state.current_user.id==this.state.pickup.shelter_id) {
          claimButton = <button className='button' onClick={this.handleUnclaimClick}>Unclaim this Inventory</button>
        }
