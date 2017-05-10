@@ -2,6 +2,11 @@ class Api::V1::InventoriesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
+    all_inventory = Inventory.all
+    all_inventory.each do |inventory|
+      inventory.active = false if inventory.created_at.to_date != DateTime.now.to_date
+      inventory.save
+    end
     @user_id = current_user.id
     @inventories = Inventory.where(user_id: @user_id, active: true)
     render json: @inventories
@@ -9,6 +14,8 @@ class Api::V1::InventoriesController < ApplicationController
 
   def show
     @inventory = Inventory.find(params[:id])
+    @inventory.active = false if @inventory.created_at.to_date != DateTime.now.to_date
+    @inventory.save
     render json: @inventory
   end
 

@@ -1,15 +1,6 @@
 class Api::V1::CommentsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
-  def index
-    @current_user = current_user
-    @current_user_type = current_user.type
-    render json: {
-      current_user: @current_user,
-      current_user_type: @current_user_type
-    }
-  end
-
   def show
     @comment = Comment.find(params[:id])
     render json: @comment

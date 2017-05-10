@@ -171,7 +171,7 @@ class InventoryShowContainer extends Component {
         pickup: inventoryData.pickup
       })
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
-    fetch(`/api/v1/comments`, {credentials: 'same-origin'})
+    fetch(`/api/v1/currentuser`, {credentials: 'same-origin'})
     .then(response => {
       if (response.ok) {
         return response;
