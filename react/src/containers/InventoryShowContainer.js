@@ -103,18 +103,17 @@ class InventoryShowContainer extends Component {
       shelter_id: this.state.current_user.id,
       store_id: this.state.user_id,
       inventory_id: this.props.params.id
-    }
+    };
     fetch('/api/v1/pickups', { method: 'POST', body: JSON.stringify(requestBody), credentials: 'same-origin' })
     .then(response => {
       let parsed = response.json();
       return parsed;
     }).then(message => {
-      console.log(message.messages)
-      if(message.messages='Success') {
+      if(message.messages=='Success') {
         this.setState({
           pickup: message.pickup,
           available: false
-        })
+        });
       }
     });
   }
@@ -122,10 +121,10 @@ class InventoryShowContainer extends Component {
 
   handleUnclaimClick() {
     // Hands over pickup id and deletes pickup, resets inventory columns
-    let pickupId = this.state.pickup.id
+    let pickupId = this.state.pickup.id;
     let requestBody = {
       pickup_id: pickupId
-    }
+    };
     fetch(`/api/v1/pickups/${pickupId}`, { method: 'DELETE', body: JSON.stringify(requestBody), credentials: 'same-origin' })
     .then(response => {
       let parsed = response.json();
