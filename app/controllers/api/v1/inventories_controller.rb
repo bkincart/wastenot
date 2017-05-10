@@ -2,8 +2,8 @@ class Api::V1::InventoriesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    all_inventory = Inventory.all
-    all_inventory.each do |inventory|
+    active_inventory = Inventory.where(active: true)
+    active_inventory.each do |inventory|
       inventory.active = false if inventory.created_at.to_date != DateTime.now.to_date
       inventory.save
     end
