@@ -36,6 +36,15 @@ class NewInventoryFormContainer extends Component {
   }
 
   handleSubmit(event) {
+    addOption()
+  }
+
+  handleLaunch(event) {
+    addOption()
+    launchQuestion()
+  }
+
+  handleSubmit(event) {
     event.preventDefault()
     let requestBody = {
       item: this.state.item,

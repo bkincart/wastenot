@@ -55,7 +55,7 @@ class InventoryIndexContainer extends Component {
             </a>
           </div>
           <div className='small-10 medium-3 small-centered columns'>
-            <a href={"/users/" + this.props.params.user_id + "/past"}>
+            <a href={"/users/" + this.props.params.user_id + "/pastinventories"}>
               <button className='button past-inventory'> View Past Inventory </button>
             </a>
           </div>
