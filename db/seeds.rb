@@ -67,7 +67,7 @@ Inventory.create(
   quantity: 5,
   measurement: 'dozen',
   item: 'Bagels',
-  available: false,
+  available: true,
   active: true,
   user_id: 1
 )
