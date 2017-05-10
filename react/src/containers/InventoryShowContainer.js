@@ -181,6 +181,7 @@ class InventoryShowContainer extends Component {
       }
     }).then(response => response.json()
     ).then(userData => {
+      debugger;
       this.setState({
         current_user: userData.current_user,
         current_user_type: userData.current_user_type
@@ -191,9 +192,16 @@ class InventoryShowContainer extends Component {
   render() {
     let claimButton = null
     // Make claim button appear if inventory is available and active and user is a shelter
-    if (this.state.available && this.state.active && this.state.current_user_type=='Shelter') { claimButton = <button className='button' onClick={this.handleClaimClick}>Claim this Inventory</button> }
+    if (this.state.available && this.state.active && this.state.current_user_type=='Shelter') {
+      claimButton = <button className='button' onClick={this.handleClaimClick}>Claim this Inventory</button>
+    }
     // Make unclaim button appear if inventory is active but not available and it was claimed by the current user
-    if (!this.state.available && this.state.active && this.state.current_user.id==this.state.pickup.shelter_id) { claimButton = <button className='button' onClick={this.handleUnclaimClick}>Unclaim this Inventory</button> }
+    if(this.state.current_user) {
+      if (!this.state.available && this.state.active && this.state.current_user.id==this.state.pickup.shelter_id) {
+         claimButton = <button className='button' onClick={this.handleUnclaimClick}>Unclaim this Inventory</button>
+       }
+     }
+
 
     let claimed = null
     if (!this.state.available) { claimed = <Label color='green' text='Claimed' /> }
