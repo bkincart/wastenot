@@ -3,7 +3,11 @@ class Api::V1::CommentsController < ApplicationController
 
   def index
     @current_user = current_user
-    render json: { current_user: @current_user }
+    @current_user_type = current_user.type
+    render json: {
+      current_user: @current_user,
+      current_user_type: @current_user_type
+    }
   end
 
   def show

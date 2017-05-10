@@ -21,10 +21,11 @@ class InventoryShowContainer extends Component {
       store_zip: '',
       store_phone: '',
       comments: [],
-      pickups: [],
+      pickup: null,
       newComment: '',
       messages: [],
-      current_user: null
+      current_user: null,
+      current_user_type: null
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -32,6 +33,7 @@ class InventoryShowContainer extends Component {
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleClaimClick = this.handleClaimClick.bind(this);
+    this.handleUnclaimClick = this.handleUnclaimClick.bind(this);
   }
 
   handleChange (event) {
@@ -96,22 +98,48 @@ class InventoryShowContainer extends Component {
   }
 
   handleClaimClick() {
-    event.preventDefault()
-    let inventoryId = this.props.params.id;
+    // Creates a pickup for this inventory and updates the inventory item and state
     let requestBody = {
-      id: inventoryId
+      shelter_id: this.state.current_user.id,
+      store_id: this.state.user_id,
+      inventory_id: this.props.params.id
     }
-    fetch(`/api/v1/inventories/${inventoryId}`, { method: 'PUT', body: JSON.stringify(requestBody), credentials: 'same-origin' })
+    fetch('/api/v1/pickups', { method: 'POST', body: JSON.stringify(requestBody), credentials: 'same-origin' })
     .then(response => {
-      let parsed = response.json()
-      return parsed
+      let parsed = response.json();
+      return parsed;
     }).then(message => {
-      if(message.messages == 'Success') {
-        debugger;
-        this.setState({ available: message.new_availability })
+      console.log(message.messages)
+      if(message.messages='Success') {
+        this.setState({
+          pickup: message.pickup,
+          available: false
+        })
       }
-    })
+    });
   }
+
+
+  handleUnclaimClick() {
+    // Hands over pickup id and deletes pickup, resets inventory columns
+    let pickupId = this.state.pickup.id
+    let requestBody = {
+      pickup_id: pickupId
+    }
+    fetch(`/api/v1/pickups/${pickupId}`, { method: 'DELETE', body: JSON.stringify(requestBody), credentials: 'same-origin' })
+    .then(response => {
+      let parsed = response.json();
+      return parsed;
+    }).then(message => {
+      if(message.message == 'Success') {
+        this.setState({
+          pickup: null,
+          available: true
+        });
+      }
+    });
+  }
+
 
   componentDidMount() {
     let inventoryId = this.props.params.id;
@@ -140,7 +168,7 @@ class InventoryShowContainer extends Component {
         store_zip: inventoryData.user.zip,
         store_phone: inventoryData.user.phone,
         comments: inventoryData.comments,
-        pickups: inventoryData.pickups
+        pickup: inventoryData.pickup
       })
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
     fetch(`/api/v1/comments`, {credentials: 'same-origin'})
@@ -155,30 +183,18 @@ class InventoryShowContainer extends Component {
     }).then(response => response.json()
     ).then(userData => {
       this.setState({
-        current_user: userData.current_user
+        current_user: userData.current_user,
+        current_user_type: userData.current_user_type
       })
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
-    fetch(`api/v1/pickups`, {credentials: 'same-origin'})
-    .then(response => {
-      if (response.ok) {
-        return response;
-      } else {
-        let errorMessage = `${response.status} (${response.statusText})`,
-          error = new Error(errorMessage);
-        throw(error);
-      }
-    }).then(response => response.json()
-  ).then(pickupData => {
-    
-  })
   }
 
   render() {
     let claimButton = null
     // Make claim button appear if inventory is available and active and user is a shelter
-    if (this.state.available && this.state.active && this.state.current_user.type=='Shelter') { claimButton = <button className='button' onClick={this.handleClaimClick}>Claim this Inventory</button> }
+    if (this.state.available && this.state.active && this.state.current_user_type=='Shelter') { claimButton = <button className='button' onClick={this.handleClaimClick}>Claim this Inventory</button> }
     // Make unclaim button appear if inventory is active but not available and it was claimed by the current user
-    if (!this.state.available && this.state.active  && this.state.current_user==this.state.pickup) {}
+    if (!this.state.available && this.state.active && this.state.current_user.id==this.state.pickup.shelter_id) { claimButton = <button className='button' onClick={this.handleUnclaimClick}>Unclaim this Inventory</button> }
 
     let claimed = null
     if (!this.state.available) { claimed = <Label color='green' text='Claimed' /> }
