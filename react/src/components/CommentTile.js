@@ -18,7 +18,7 @@ class CommentTile extends Component {
       <div className='row'>
         <div className='small-centered small-10 columns comment_tile'>
           <h2>{this.props.comment.body}</h2>
-          <p>Posted by {this.props.comment.user_name} at {this.props.comment.updated_at}</p>
+          <p>Posted by {this.props.comment.user_name} on {this.props.comment.viewtime}</p>
           {editDeleteOptions}
         </div>
       </div>
