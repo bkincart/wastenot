@@ -45,7 +45,6 @@ class PastPickupIndexContainer extends Component {
     })
 
     return(
-      debugger;
       <div>
       <br/>
         <div className='row align-middle'>
