@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PickupTile from '../components/PickupTile'
+import PickupTile from '../components/PickupTile';
 
 class PastPickupIndexContainer extends Component {
   constructor(props) {
@@ -7,7 +7,7 @@ class PastPickupIndexContainer extends Component {
 
     this.state = {
       past_pickups: []
-    }
+    };
   }
 
   componentDidMount () {
@@ -24,7 +24,7 @@ class PastPickupIndexContainer extends Component {
   ).then(pastPickupData => {
       this.setState({
         past_pickups: pastPickupData
-      })
+      });
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
 
   }
