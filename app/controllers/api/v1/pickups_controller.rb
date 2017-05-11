@@ -5,8 +5,8 @@ class Api::V1::PickupsController < ApplicationController
     @user_id = current_user.id
     @user_pickups = Pickup.where(shelter_id: @user_id)
     @user_pickups.each do |pickup|
-        pickup.active = false if pickup.inventory.created_at.to_date != DateTime.now.to_date
-        pickup.save
+      pickup.active = false if pickup.inventory.created_at.to_date != DateTime.now.to_date
+      pickup.save
     end
     @active_pickups = Pickup.where(shelter_id: @user_id, active: true)
     # Serve up the active pickup items
