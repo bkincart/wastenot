@@ -13,19 +13,19 @@ class InventoryShowContainer extends Component {
       item: '',
       available: null,
       active: null,
-      user_id: null,
-      store_name: '',
-      store_address: '',
-      store_city: '',
-      store_state: '',
-      store_zip: '',
-      store_phone: '',
+      userId: null,
+      storeName: '',
+      storeAddress: '',
+      storeCity: '',
+      storeState: '',
+      storeZip: '',
+      storePhone: '',
       comments: [],
       pickup: null,
       newComment: '',
       messages: [],
-      current_user: null,
-      current_user_type: null
+      currentUser: null,
+      currentUserType: null
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -100,8 +100,8 @@ class InventoryShowContainer extends Component {
   handleClaimClick() {
     // Creates a pickup for this inventory and updates the inventory item and state
     let requestBody = {
-      shelter_id: this.state.current_user.id,
-      store_id: this.state.user_id,
+      shelter_id: this.state.currentUser.id,
+      store_id: this.state.userId,
       inventory_id: this.props.params.id
     };
     fetch('/api/v1/pickups', { method: 'POST', body: JSON.stringify(requestBody), credentials: 'same-origin' })
@@ -159,13 +159,13 @@ class InventoryShowContainer extends Component {
         item: inventoryData.item,
         available: inventoryData.available,
         active: inventoryData.active,
-        user_id: inventoryData.user_id,
-        store_name: inventoryData.user.name,
-        store_address: inventoryData.user.address,
-        store_city: inventoryData.user.city,
-        store_state: inventoryData.user.state,
-        store_zip: inventoryData.user.zip,
-        store_phone: inventoryData.user.phone,
+        userId: inventoryData.user_id,
+        storeName: inventoryData.user.name,
+        storeAddress: inventoryData.user.address,
+        storeCity: inventoryData.user.city,
+        storeState: inventoryData.user.state,
+        storeZip: inventoryData.user.zip,
+        storePhone: inventoryData.user.phone,
         comments: inventoryData.comments,
         pickup: inventoryData.pickup
       })
@@ -182,8 +182,8 @@ class InventoryShowContainer extends Component {
     }).then(response => response.json()
     ).then(userData => {
       this.setState({
-        current_user: userData.current_user,
-        current_user_type: userData.current_user_type
+        currentUser: userData.current_user,
+        currentUserType: userData.current_user_type
       })
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -191,12 +191,12 @@ class InventoryShowContainer extends Component {
   render() {
     let claimButton = null
     // Make claim button appear if inventory is available and active and user is a shelter
-    if (this.state.available && this.state.active && this.state.current_user_type=='Shelter') {
+    if (this.state.available && this.state.active && this.state.currentUserType=='Shelter') {
       claimButton = <button className='button' onClick={this.handleClaimClick}>Claim this Inventory</button>
     }
     // Make unclaim button appear if inventory is active but not available and it was claimed by the current user
-    if(this.state.current_user!=null && this.state.pickup!=null) {
-      if (this.state.active && this.state.current_user.id==this.state.pickup.shelter_id) {
+    if(this.state.currentUser!=null && this.state.pickup!=null) {
+      if (this.state.active && this.state.currentUser.id==this.state.pickup.shelter_id) {
          claimButton = <button className='button' onClick={this.handleUnclaimClick}>Unclaim this Inventory</button>
        }
      }
@@ -208,9 +208,9 @@ class InventoryShowContainer extends Component {
     let expired = null
     if (!this.state.active) { expired = <Label color='orange' text='Expired' /> }
 
-    let measurement_p = null
+    let measurementP = null
     if(this.state.measurement) {
-      measurement_p = <p> Measurement: { this.state.measurement } </p>
+      measurementP = <p> Measurement: { this.state.measurement } </p>
     }
 
     let inventoryComments = this.state.comments.map(comment => {
@@ -218,7 +218,7 @@ class InventoryShowContainer extends Component {
         <CommentTile
           key = {comment.id}
           comment = {comment}
-          current_user={this.state.current_user}
+          currentUser={this.state.currentUser}
           handleDelete={this.handleDelete}
         />
       )
@@ -228,18 +228,18 @@ class InventoryShowContainer extends Component {
       <div>
         <div className='row align-middle'>
           <div className='small-centered small-10 medium-5 columns text-center'>
-              <h1> {this.state.store_name} </h1>
+              <h1> {this.state.storeName} </h1>
               <p>
-                {this.state.store_address} <br/>
-                {this.state.store_city}, {this.state.store_state} {this.state.store_zip}
+                {this.state.storeAddress} <br/>
+                {this.state.storeCity}, {this.state.storeState} {this.state.storeZip}
                 <br />
-                ({this.state.store_phone.slice(0,3)}) {this.state.store_phone.slice(3,6)}-{this.state.store_phone.slice(6,10)}
+                ({this.state.storePhone.slice(0,3)}) {this.state.storePhone.slice(3,6)}-{this.state.storePhone.slice(6,10)}
               </p>
           </div>
           <div className='small-centered small-10 medium-5 columns text-center'>
             <p> Item: {this.state.item} </p>
             <p> Quantity: {this.state.quantity} </p>
-            { measurement_p }
+            { measurementP }
             { claimButton }
             { claimed }
             { expired }

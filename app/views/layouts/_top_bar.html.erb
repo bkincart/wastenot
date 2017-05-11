@@ -25,6 +25,7 @@
               <li><a href="/users/<%= current_user.id %>/inventories" class='black-text'> Current Inventory </a></li>
             <% else %>
               <li><a href="/users/<%= current_user.id %>/pickups" class='black-text'> View Pickups </a></li>
+              <li><a href="/nearme" class='black-text'> Inventory Near Me </a></li>
               <li><a href="/available" class='black-text'> Current Available Inventory </a></li>
             <% end %>
             <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete,  class: 'black-text' %> </li>

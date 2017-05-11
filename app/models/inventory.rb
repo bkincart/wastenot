@@ -11,4 +11,13 @@ class Inventory < ApplicationRecord
   def self.search(search)
     where("item ILIKE ?", "%#{search}%")
   end
+
+  # Iterate through active inventory and mark any not from today as inactive
+  def self.check_active
+    active_inventory= Inventory.where(active: true)
+    active_inventory.each do |inventory|
+      inventory.active = false if inventory.created_at.to_date != DateTime.now.to_date
+      inventory.save
+    end
+  end
 end

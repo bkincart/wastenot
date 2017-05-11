@@ -6,7 +6,7 @@ class PastInventoryIndexContainer extends Component {
     super(props);
 
     this.state = {
-      past_inventories: []
+      pastInventories: []
     }
   }
 
@@ -23,14 +23,14 @@ class PastInventoryIndexContainer extends Component {
     }).then(response => response.json()
     ).then(pastInventoryData => {
       this.setState({
-        past_inventories: pastInventoryData
+        pastInventories: pastInventoryData
       })
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
 
   }
 
   render () {
-    let past_inventories = this.state.past_inventories.map (inventory => {
+    let pastInventories = this.state.pastInventories.map (inventory => {
       return (
         <InventoryTile
           key = {inventory.id}
@@ -39,6 +39,7 @@ class PastInventoryIndexContainer extends Component {
           quantity = {inventory.quantity}
           measurement = {inventory.measurement}
           item = {inventory.item}
+          store = {inventory.user.name}
         />
       )
     })
@@ -56,7 +57,7 @@ class PastInventoryIndexContainer extends Component {
             </a>
           </div>
         </div>
-        { past_inventories }
+        { pastInventories }
       </div>
     )
   }

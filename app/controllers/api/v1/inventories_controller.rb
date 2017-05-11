@@ -2,12 +2,7 @@ class Api::V1::InventoriesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    # Iterate through active inventory and mark any not from today as inactive
-    active_inventory = Inventory.where(active: true)
-    active_inventory.each do |inventory|
-      inventory.active = false if inventory.created_at.to_date != DateTime.now.to_date
-      inventory.save
-    end
+    Inventory.check_active
     # Pull inventory for this user that is active
     @user_id = current_user.id
     @active_inventories = Inventory.where(user_id: @user_id, active: true)

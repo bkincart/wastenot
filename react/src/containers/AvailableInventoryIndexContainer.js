@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import PickupTile from '../components/PickupTile';
+import InventoryTile from '../components/InventoryTile'
 
-class PastPickupIndexContainer extends Component {
+class AvailableInventoryIndexContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      pastPickups: []
-    };
+      availableInventories: []
+    }
   }
 
   componentDidMount () {
-    fetch(`/api/v1/pastpickups`, {credentials: 'same-origin'})
+    fetch(`/api/v1/availableinventories`, {credentials: 'same-origin'})
     .then(response => {
       if (response.ok) {
         return response;
@@ -21,25 +21,25 @@ class PastPickupIndexContainer extends Component {
         throw(error);
       }
     }).then(response => response.json()
-  ).then(pastPickupData => {
+  ).then(availableInventoryData => {
       this.setState({
-        pastPickups: pastPickupData
-      });
+        availableInventories: availableInventoryData
+      })
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
 
   }
 
   render () {
-    let pastPickups = this.state.pastPickups.map (pickup => {
+    let availableInventories = this.state.availableInventories.map (inventory => {
       return (
-        <PickupTile
-          key = {pickup.id}
-          id = {pickup.id}
-          storeName = {pickup.store.name}
-          inventoryId = {pickup.inventory.id}
-          inventoryItem = {pickup.inventory.item}
-          inventoryMeasurement = {pickup.inventory.measurement}
-          inventoryQuantity = {pickup.inventory.quantity}
+        <InventoryTile
+          key = {inventory.id}
+          id = {inventory.id}
+          available = {inventory.available}
+          quantity = {inventory.quantity}
+          measurement = {inventory.measurement}
+          item = {inventory.item}
+          store = {inventory.user.name}
         />
       )
     })
@@ -49,18 +49,18 @@ class PastPickupIndexContainer extends Component {
       <br/>
         <div className='row align-middle'>
           <div className='small-10 medium-5 small-centered columns'>
-            <h1>Your Past Pickups</h1>
+            <h1> All Inventory Available Today </h1>
           </div>
           <div className='small-10 medium-4 small-centered columns'>
             <a href={"/users/" + this.props.params.user_id + "/pickups"}>
-              <button className='button past-inventory'> Back to Current Pickups </button>
+              <button className='button past-inventory'> Back to Your Current Pickups </button>
             </a>
           </div>
         </div>
-        { pastPickups }
+        { availableInventories }
       </div>
     )
   }
 }
 
-export default PastPickupIndexContainer;
+export default AvailableInventoryIndexContainer;
