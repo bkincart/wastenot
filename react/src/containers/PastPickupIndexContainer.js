@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import PickupTile from '../components/PickupTile';
 
-class PickupIndexContainer extends Component {
+class PastPickupIndexContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      pickups: []
+      past_pickups: []
     };
   }
 
   componentDidMount () {
-    fetch(`/api/v1/pickups`, {credentials: 'same-origin'})
+    fetch(`/api/v1/pastpickups`, {credentials: 'same-origin'})
     .then(response => {
       if (response.ok) {
         return response;
@@ -21,15 +21,16 @@ class PickupIndexContainer extends Component {
         throw(error);
       }
     }).then(response => response.json()
-    ).then(pickupData => {
+  ).then(pastPickupData => {
       this.setState({
-        pickups: pickupData
-      })
+        past_pickups: pastPickupData
+      });
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
+
   }
 
   render () {
-    let pickups = this.state.pickups.map (pickup => {
+    let past_pickups = this.state.past_pickups.map (pickup => {
       return (
         <PickupTile
           key = {pickup.id}
@@ -48,18 +49,18 @@ class PickupIndexContainer extends Component {
       <br/>
         <div className='row align-middle'>
           <div className='small-10 medium-5 small-centered columns'>
-            <h1>Your Current Pickups</h1>
+            <h1>Your Past Pickups</h1>
           </div>
-          <div className='small-10 medium-3 small-centered columns'>
-            <a href={"/users/" + this.props.params.user_id + "/pastpickups"}>
-              <button className='button past-inventory'> View Past Pickups </button>
+          <div className='small-10 medium-4 small-centered columns'>
+            <a href={"/users/" + this.props.params.user_id + "/pickups"}>
+              <button className='button past-inventory'> Back to Current Pickups </button>
             </a>
           </div>
         </div>
-        { pickups }
+        { past_pickups }
       </div>
     )
   }
 }
 
-export default PickupIndexContainer;
+export default PastPickupIndexContainer;

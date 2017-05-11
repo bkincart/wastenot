@@ -11,7 +11,7 @@ class PastInventoryIndexContainer extends Component {
   }
 
   componentDidMount () {
-    fetch(`/api/v1/past`, {credentials: 'same-origin'})
+    fetch(`/api/v1/pastinventories`, {credentials: 'same-origin'})
     .then(response => {
       if (response.ok) {
         return response;
