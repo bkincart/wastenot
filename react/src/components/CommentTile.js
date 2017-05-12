@@ -10,8 +10,7 @@ class CommentTile extends Component {
     if(this.props.currentUser) {
       if(this.props.comment.user_id==this.props.currentUser.id) {
         editDeleteOptions = <p>
-          <a href={`/comments/` + this.props.comment.id + `/edit`}>Edit Comment</a>
-           <a onClick={() => this.props.handleDelete(this.props.comment)}>Delete Comment</a>
+          <a href={`/comments/` + this.props.comment.id + `/edit`}>Edit Comment</a><span/> <a onClick={() => this.props.handleDelete(this.props.comment)}>Delete Comment</a>
         </p>
       }
     }
