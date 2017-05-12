@@ -9,13 +9,17 @@
     <% @inventories.each do |inventory| %>
       <% if inventory.active && inventory.available %>
         <div class='row inventory-tile-container align-center'>
-          <div class="small-10 small-centered columns inventory-tile green-outline">
+          <div class="small-10 small-centered columns inventory-tile">
             <a href="/inventories/<%= inventory.id %>" class='black-text'>
-              <h2> <span class='strong'>Item:</span> <%= inventory.item %> </h2>
-              <p> Quantity: <%= inventory.quantity %> </p>
-              <% if inventory.measurement %>
-                <p> Measurement: <%= inventory.measurement %> </p>
-              <% end %>
+              <div class='available-status'> Available </div>
+              <div class='tile-text'>
+                <h2> <%= inventory.item %> </h2>
+                <p> Quantity: <%= inventory.quantity %> </p>
+                <% if inventory.measurement %>
+                  <p> Measurement: <%= inventory.measurement %> </p>
+                <% end %>
+                <p> <%= inventory.user.name %> </p>
+              </div>
             </a>
           </div>
         </div>
@@ -26,14 +30,17 @@
     <% @inventories.each do |inventory| %>
       <% if inventory.active && !inventory.available%>
         <div class='row inventory-tile-container align-center'>
-          <div class="small-10 small-centered columns inventory-tile orange-outline">
+          <div class="small-10 small-centered columns inventory-tile">
             <a href="/inventories/<%= inventory.id %>" class='black-text'>
-              <h2> <span class='strong'>Item:</span> <%= inventory.item %> </h2>
-              <p> Quantity: <%= inventory.quantity %> </p>
-              <% if inventory.measurement %>
-                <p> Measurement: <%= inventory.measurement %> </p>
-              <% end %>
-              <h3 className='orange claimed'> Claimed </h3>
+              <div class='claimed-status'> Claimed </div>
+              <div class='tile-text'>
+                <h2> <%= inventory.item %> </h2>
+                <p> Quantity: <%= inventory.quantity %> </p>
+                <% if inventory.measurement %>
+                  <p> Measurement: <%= inventory.measurement %> </p>
+                <% end %>
+                <p> <%= inventory.user.name %> </p>
+              </div>
             </a>
           </div>
         </div>
@@ -44,13 +51,17 @@
     <% @inventories.each do |inventory| %>
       <% if !inventory.active %>
         <div class='row inventory-tile-container align-center'>
-          <div class="small-10 small-centered columns inventory-tile orange-outline">
+          <div class="small-10 small-centered columns inventory-tile">
             <a href="/inventories/<%= inventory.id %>" class='black-text'>
-              <h2> <span class='strong'>Item:</span> <%= inventory.item %> </h2>
-              <p> Quantity: <%= inventory.quantity %> </p>
-              <% if inventory.measurement %>
-                <p> Measurement: <%= inventory.measurement %> </p>
-              <% end %>
+              <div class='expired-status'> Expired </div>
+              <div class='tile-text'>
+                                <h2> <%= inventory.item %> </h2>
+                <p> Quantity: <%= inventory.quantity %> </p>
+                <% if inventory.measurement %>
+                  <p> Measurement: <%= inventory.measurement %> </p>
+                <% end %>
+                <p> <%= inventory.user.name %> </p>
+              </div>
             </a>
           </div>
         </div>

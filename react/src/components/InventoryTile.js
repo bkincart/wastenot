@@ -20,7 +20,7 @@ class InventoryTile extends Component {
 
     return (
       <div className='row inventory-tile-container align-center'>
-          <div className={"small-10 small-centered columns inventory-tile"}>
+          <div className="small-10 small-centered columns inventory-tile">
             <a href={"/inventories/" + this.props.id} className='black-text'>
               {statusBar}
               <div className='tile-text'>
