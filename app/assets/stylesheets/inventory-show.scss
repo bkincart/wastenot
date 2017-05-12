@@ -32,31 +32,34 @@
 
 .comments {
   margin-top: 5em;
-  // text-align: center;
 
   h1 {
     font-size: 2em;
     padding: 0px;
-  //   border: 2px solid $green;
-  //   width: 30%;
-  //   margin: auto;
-  //   box-shadow: 3px 3px 0px $shadow-grey;
   }
 
 }
 
 .comment_tile {
-  border: 3px solid $green;
+  background-color: $white;
   box-shadow: 3px 3px 0px $shadow-grey;
   margin-top: 15px;
 
   h2 {
     font-size: 1.5em;
-    // background-color: $shadow-grey;
     margin-top: 10px;
+  }
+
+  a {
+    color: $green;
+
+    &:hover {
+      color: $black;
+    }
   }
 }
 
 #map {
   border: 2px solid $black;
+  margin: auto;
 }
