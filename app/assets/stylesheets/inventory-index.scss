@@ -15,7 +15,6 @@ body {
 .claimed-status {
   background-color: $orange;
   color: $white;
-  padding: 0.3em 0 0.3em 1em;
   font-size: 1.3em;
   font-weight: strong;
   padding: 0.3em 0 0.3em 1em;
@@ -24,7 +23,6 @@ body {
 .expired-status {
   background-color: $red-onion;
   color: $white;
-  padding: 0.3em 0 0.3em 1em;
   font-size: 1.3em;
   font-weight: strong;
   padding: 0.3em 0 0.3em 1em;
@@ -43,8 +41,8 @@ a .black-text {
 }
 
 .add-inventory {
-  width: 50%;
   background-color: $green;
+  width: 50%;
 
   &:hover {
     background-color: darken($green, 5%);
@@ -55,12 +53,13 @@ a .black-text {
   width: 50%;
 }
 
-.inventory-tile, .pickup-tile {
+.inventory-tile,
+.pickup-tile {
   background-color: $white;
-  box-shadow: 0px 4px 20px 1px #8f8f8f;
+  box-shadow: 0px 4px 20px 1px $box-shadow;
+  padding: 0;
   transform: scale(1);
   transition: all 200ms ease-in;
-  padding: 0;
 
   &:hover {
     transform: scale(1.04);
@@ -69,7 +68,7 @@ a .black-text {
 
   a {
     &:hover {
-      color: black;
+      color: $black;
     }
   }
 

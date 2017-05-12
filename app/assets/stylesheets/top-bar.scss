@@ -35,7 +35,7 @@
   }
 
   .top-bar-right {
-    margin-top: .5em;
+    margin-top: 0.5em;
 
     a {
       font-size: 1.2em;
@@ -84,13 +84,13 @@
     transition: 275ms ease;
 
     &::placeholder {
-      color: #e7e7e7;
+      color: $placeholder;
     }
   }
 
   i {
     position: absolute;
-    color: white;
+    color: $white;
     font-size: 18px;
     top: 50%;
     right: 13px;

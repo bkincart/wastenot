@@ -22,13 +22,13 @@
 }
 .actions {
   input {
-    width: 100%;
+    background-color: $green;
     font-size: 1.2em;
     padding: 0.5em;
-    background-color: $green;
+    width: 100%;
 
     &:hover {
-      background-color: orange;
+      background-color: $orange;
     }
   }
 }

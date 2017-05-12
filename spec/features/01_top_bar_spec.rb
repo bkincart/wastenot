@@ -39,8 +39,8 @@ feature 'User Sign Up and Log In' do
     fill_in 'Zip', with: '02216'
     fill_in 'Phone', with: '617-555-2947'
     fill_in 'Email', with: 'star@test.com'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
+    fill_in 'Password (6 characters minimum)', with: 'password'
+    fill_in 'Password Confirmation', with: 'password'
     click_button 'Sign Up!'
 
     expect(page).to have_content 'Welcome! You\'ve successfully signed up.'
@@ -78,8 +78,8 @@ feature 'User Sign Up and Log In' do
     fill_in 'Zip', with: '0221'
     fill_in 'Phone', with: '617-555-2947183'
     fill_in 'Email', with: 'star@test'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'differentpassword'
+    fill_in 'Password (6 characters minimum)', with: 'password'
+    fill_in 'Password Confirmation', with: 'differentpassword'
     click_button 'Sign Up!'
 
     expect(page).to have_content 'Zip must have a length of 5'
@@ -104,8 +104,8 @@ feature 'User Sign Up and Log In' do
     fill_in 'Zip', with: '02216'
     fill_in 'Phone', with: '617-555-2947'
     fill_in 'Email', with: user.email
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
+    fill_in 'Password (6 characters minimum)', with: 'password'
+    fill_in 'Password Confirmation', with: 'password'
     click_button 'Sign Up!'
 
     expect(page).to have_content 'An account already exists for that email address!'
