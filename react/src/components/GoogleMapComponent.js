@@ -17,10 +17,10 @@ class GoogleMapComponent extends Component {
 
   componentWillMount() {
     // Prepare store address for geocoding
-    const storeAddressText = `${this.props.storeAddress} ${this.props.storeCity} ${this.props.storeState} ${this.props.storeZip}`
-    const storeAddressWords = storeAddressText.split(' ')
-    const storeAddressQuery = storeAddressWords.join('+')
-    const GMAPS_DIRECTIONS_KEY = 'AIzaSyBouyQf7iBzl02N2sYIOB3IxwYqq0RY3TQ'
+    const storeAddressText = `${this.props.storeAddress} ${this.props.storeCity} ${this.props.storeState} ${this.props.storeZip}`;
+    const storeAddressWords = storeAddressText.split(' ');
+    const storeAddressQuery = storeAddressWords.join('+');
+    const GMAPS_DIRECTIONS_KEY = 'AIzaSyBouyQf7iBzl02N2sYIOB3IxwYqq0RY3TQ';
 
     // Grab latitude and longitude from Gmaps Geocoding API
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${storeAddressQuery}&key=${GMAPS_DIRECTIONS_KEY}`)
@@ -37,7 +37,7 @@ class GoogleMapComponent extends Component {
       this.setState({
         latitude: addressData.results[0].geometry.location.lat,
         longitude: addressData.results[0].geometry.location.lng
-      })
+      });
     }).catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
@@ -51,9 +51,9 @@ class GoogleMapComponent extends Component {
 
   componentDidMount() {
     window.initMap = this.initMap;
-    const GMAPS_DIRECTIONS_KEY = 'AIzaSyBouyQf7iBzl02N2sYIOB3IxwYqq0RY3TQ'
+    const GMAPS_DIRECTIONS_KEY = 'AIzaSyBouyQf7iBzl02N2sYIOB3IxwYqq0RY3TQ';
 
-    this.loadJS(`https://maps.googleapis.com/maps/api/js?key=${GMAPS_DIRECTIONS_KEY}&callback=initMap`)
+    this.loadJS(`https://maps.googleapis.com/maps/api/js?key=${GMAPS_DIRECTIONS_KEY}&callback=initMap`);
   }
 
   initMap() {

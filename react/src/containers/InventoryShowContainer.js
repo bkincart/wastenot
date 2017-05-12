@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Label from '../components/Label';
 import CommentTile from '../components/CommentTile';
 import CommentInputField from '../components/CommentInputField';
-import GoogleMapComponent from '../components/GoogleMapComponent'
+import GoogleMapComponent from '../components/GoogleMapComponent';
 
 class InventoryShowContainer extends Component {
   constructor(props) {
