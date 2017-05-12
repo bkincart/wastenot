@@ -11,7 +11,7 @@ class NewInventoryFormContainer extends Component {
       quantity: '',
       measurement: '',
       messages: [],
-      current_user: null
+      currentUser: null
     };
 
     this.handleItemChange = this.handleItemChange.bind(this);
@@ -49,7 +49,7 @@ class NewInventoryFormContainer extends Component {
     }).then(message => {
       this.setState({
         messages: message.messages,
-        current_user: message.current_user
+        currentUser: message.current_user
       });
       if(message.messages == 'Success') {
         browserHistory.push(`/users/${message.current_user.id}/inventories`);

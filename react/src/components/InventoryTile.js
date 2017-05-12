@@ -6,9 +6,9 @@ class InventoryTile extends Component {
   }
 
   render () {
-    let measurement_p = null
+    let measurementP = null
     if(this.props.measurement) {
-      measurement_p = <p> Measurement: { this.props.measurement } </p>
+      measurementP = <p> Measurement: { this.props.measurement } </p>
     }
 
     let claimed = null
@@ -26,8 +26,9 @@ class InventoryTile extends Component {
           <div className={"small-10 small-centered columns inventory-tile " + outline}>
             <a href={"/inventories/" + this.props.id} className='black-text'>
               <h2> <span className='strong'>Item:</span> { this.props.item } </h2>
-              <p> Quantity: { this.props.quantity } </p>
-              { measurement_p }
+              <h3> Quantity: { this.props.quantity } </h3>
+              <p> { this.props.store} </p>
+              { measurementP }
               { claimed }
               </a>
           </div>

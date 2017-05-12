@@ -1,24 +1,24 @@
 import React from 'react';
 
 const CommentInputField = props => {
-  let error_array = []
+  let errorArray = []
   if(props.errors.length > 0) {
     for (let error of props.errors) {
       if(error.includes(props.label)) {
-        error_array.push(error);
+        errorArray.push(error);
       }
     }
   }
 
-  let error_message = ''
-  if(error_array.length > 0) {
-      error_message = error_array.join(', ');
+  let errorMessage = ''
+  if(errorArray.length > 0) {
+      errorMessage = errorArray.join(', ');
   }
 
   return (
     <div className='comment-input'>
       <input type='text' placeholder={props.placeholder} value={props.value} onChange={props.onChange} />
-      <p>{error_message}</p>
+      <p>{errorMessage}</p>
     </div>
   )
 };

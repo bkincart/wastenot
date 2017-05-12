@@ -34,11 +34,11 @@ class PickupIndexContainer extends Component {
         <PickupTile
           key = {pickup.id}
           id = {pickup.id}
-          store_name = {pickup.store.name}
-          inventory_id = {pickup.inventory.id}
-          inventory_item = {pickup.inventory.item}
-          inventory_measurement = {pickup.inventory.measurement}
-          inventory_quantity = {pickup.inventory.quantity}
+          storeName = {pickup.store.name}
+          inventoryId = {pickup.inventory.id}
+          inventoryItem = {pickup.inventory.item}
+          inventoryMeasurement = {pickup.inventory.measurement}
+          inventoryQuantity = {pickup.inventory.quantity}
         />
       )
     })

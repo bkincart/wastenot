@@ -12,11 +12,12 @@ Rails.application.routes.draw do
   resources :inventories, only: [:index, :show]
 
   resources :available, only: :index
+  resources :nearme, only: :index
 
   resources :stores, only: :index
   resources :shelters, only: :index
   resources :testimonials, only: :index
-  resources :comments, only: [:edit, :destroy]
+  resources :comments, only: [:edit]
 
   namespace :api do
     namespace :v1 do
@@ -26,6 +27,8 @@ Rails.application.routes.draw do
       resources :pastpickups, only: :index
       resources :comments, except: [:index, :new, :edit]
       resources :currentuser, only: :index
+      resources :nearmeinventories, only: :index
+      resources :availableinventories, only: :index
     end
   end
 

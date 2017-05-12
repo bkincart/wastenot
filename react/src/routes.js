@@ -7,6 +7,8 @@ import PickupIndexContainer from './containers/PickupIndexContainer';
 import PastPickupIndexContainer from './containers/PastPickupIndexContainer';
 import NewInventoryFormContainer from './containers/NewInventoryFormContainer';
 import EditCommentContainer from './containers/EditCommentContainer';
+import NearMeInventoryIndexContainer from './containers/NearMeInventoryIndexContainer'
+import AvailableInventoryIndexContainer from './containers/AvailableInventoryIndexContainer'
 
 let routes = (
   <Route path='/'>
@@ -16,6 +18,8 @@ let routes = (
     <Route path='/users/:user_id/pastinventories' component={PastInventoryIndexContainer} />
     <Route path='/users/:user_id/pickups' component={PickupIndexContainer} />
     <Route path='/users/:user_id/pastpickups' component={PastPickupIndexContainer} />
+    <Route path='/nearme' component={NearMeInventoryIndexContainer} />
+    <Route path='/available' component={AvailableInventoryIndexContainer} />
     <Route path='/comments/:id/edit' component={EditCommentContainer} />
   </Route>
 );

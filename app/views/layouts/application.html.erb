@@ -6,17 +6,19 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
-    <script src="https://use.fontawesome.com/8dfe7c0466.js"></script>
+    <script src="https://use.fontawesome.com/<%= ENV["FONTAWESOME_KEY"] %>.js"></script>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
+    <%= render "layouts/top_bar" %>
+    <div class='topbar-border'></div>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <%= render "layouts/top_bar" %>
     <%= yield %>
   </body>
 </html>

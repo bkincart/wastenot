@@ -38,6 +38,7 @@ class InventoryIndexContainer extends Component {
           quantity = {inventory.quantity}
           measurement = {inventory.measurement}
           item = {inventory.item}
+          store = {inventory.user.name}
         />
       )
     })
