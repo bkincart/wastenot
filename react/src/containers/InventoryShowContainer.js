@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Label from '../components/Label';
 import CommentTile from '../components/CommentTile';
 import CommentInputField from '../components/CommentInputField';
+import GoogleMapComponent from '../components/GoogleMapComponent';
 
 class InventoryShowContainer extends Component {
   constructor(props) {
@@ -213,6 +214,16 @@ class InventoryShowContainer extends Component {
       measurementP = <p> Measurement: { this.state.measurement } </p>
     }
 
+    let mapComponent = null
+    if(this.state.storeAddress) {
+      mapComponent = <GoogleMapComponent
+        storeAddress = {this.state.storeAddress}
+        storeCity = {this.state.storeCity}
+        storeState = {this.state.storeState}
+        storeZip = {this.state.storeZip}
+      />
+    }
+
     let inventoryComments = this.state.comments.map(comment => {
       return(
         <CommentTile
@@ -235,6 +246,7 @@ class InventoryShowContainer extends Component {
                 <br />
                 ({this.state.storePhone.slice(0,3)}) {this.state.storePhone.slice(3,6)}-{this.state.storePhone.slice(6,10)}
               </p>
+              {mapComponent}
           </div>
           <div className='small-centered small-10 medium-5 columns text-center'>
             <p> Item: {this.state.item} </p>

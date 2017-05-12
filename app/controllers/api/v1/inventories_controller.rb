@@ -14,18 +14,6 @@ class Api::V1::InventoriesController < ApplicationController
     # Make sure inventory is not active if it is not from today
     @inventory.active = false if @inventory.created_at.to_date != DateTime.now.to_date
     @inventory.save
-    # Prepare store address for geocoding
-    # store = @inventory.user
-    # store_address_text = store.address + ' ' + store.city + ' ' + store.state + ' ' + store.zip
-    # store_address_words = store_address_text.split(' ')
-    # store_address_url = store_address_words.join('+')
-    # # Grab latitude and longitude from Gmaps Geocoding API
-    # store_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{store_address_url}&key=#{ENV["GMAPS_DIRECTIONS_KEY"]}"
-    # store_uri = URI(store_url)
-    # response = Net::HTTP.get(store_uri)
-    # workable_data = JSON.parse(response)
-    # latitude = workable_data['results'][0]['geometry']['location']['lat']
-    # longitude = workable_data['results'][0]['geometry']['location']['lng']
 
     # Serve up that inventory item
     render json: @inventory
