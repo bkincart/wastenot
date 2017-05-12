@@ -1,7 +1,10 @@
 @import "foundation_and_overrides";
-@import "inventory_show";
-@import "top_bar";
-@import "landing_page";
+@import "definitions";
+@import "inventory-show";
+@import "top-bar";
+@import "landing-page";
 @import "custom";
-@import "inventory_index";
-@import "pickup_index";
+@import "inventory-index";
+@import "pickup-index";
+@import "notifications";
+@import "wastenot-form";

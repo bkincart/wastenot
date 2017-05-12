@@ -36,6 +36,7 @@ class PastInventoryIndexContainer extends Component {
           key = {inventory.id}
           id = {inventory.id}
           available = {inventory.available}
+          active = {inventory.active}
           quantity = {inventory.quantity}
           measurement = {inventory.measurement}
           item = {inventory.item}

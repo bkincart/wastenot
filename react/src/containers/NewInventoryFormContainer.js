@@ -59,27 +59,36 @@ class NewInventoryFormContainer extends Component {
 
   render () {
     return(
-      <form onSubmit={this.handleSubmit}>
-        <InputField
-          label='Item'
-          value={this.state.item}
-          onChange={this.handleItemChange}
-          errors={this.state.messages}
-        />
-        <InputField
-          label='Quantity'
-          value={this.state.quantity}
-          onChange={this.handleQuantityChange}
-          errors={this.state.messages}
-        />
-        <InputField
-          label='Measurement (optional)'
-          value={this.state.measurement}
-          onChange={this.handleMeasurementChange}
-          errors={this.state.messages}
-        />
-        <input type='submit' />
-      </form>
+      <div className='row'>
+        <div className='small-10 medium-5 columns wastenot-form'>
+
+          <h2>Add New Inventory</h2>
+
+          <form onSubmit={this.handleSubmit}>
+            <InputField
+              value={this.state.item}
+              onChange={this.handleItemChange}
+              errors={this.state.messages}
+              placeholder='Item'
+            />
+            <InputField
+              value={this.state.quantity}
+              onChange={this.handleQuantityChange}
+              errors={this.state.messages}
+              placeholder='Quantity'
+            />
+            <InputField
+              value={this.state.measurement}
+              onChange={this.handleMeasurementChange}
+              errors={this.state.messages}
+              placeholder='Measurement (optional)'
+            />
+            <div className="actions">
+              <input type='submit' className='button' />
+            </div>
+          </form>
+        </div>
+      </div>
     )
   }
 }

@@ -1,12 +1,5 @@
-$orange: #e39219;
-$green: #82c13f;
-$black: #000000;
-$white: #ffffff;
-$shadow-grey: rgba(#888888, 0.65);
+@import "definitions";
 
-a:hover {
-  color: $green;
-}
 
 .green-text {
   color: $green;
@@ -27,7 +20,11 @@ a:hover {
 }
 
 .top-bar {
-  // border-bottom: 3px solid $black;
+  border-bottom: 1px solid $shadow-grey;
+
+  a:hover {
+    color: $green;
+  }
 
   .title {
     padding: 0px;
@@ -38,7 +35,9 @@ a:hover {
   }
 
   .top-bar-right {
-    a{
+    margin-top: .5em;
+
+    a {
       font-size: 1.2em;
     }
   }
@@ -85,7 +84,7 @@ a:hover {
     transition: 275ms ease;
 
     &::placeholder {
-      color: #cccccc;
+      color: #e7e7e7;
     }
   }
 

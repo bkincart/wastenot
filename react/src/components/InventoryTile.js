@@ -11,25 +11,24 @@ class InventoryTile extends Component {
       measurementP = <p> Measurement: { this.props.measurement } </p>
     }
 
-    let claimed = null
-    if(!this.props.available) {
-      claimed = <h3 className='orange claimed'> Claimed </h3>
-    }
-
-    let outline = 'orange-outline'
-    if(this.props.available) {
-      outline = 'green-outline'
+    let statusBar = <div className='available-status'> Available </div>
+    if(!this.props.available && this.props.active) {
+      statusBar = <div className='claimed-status'> Claimed </div>
+    } else if(!this.props.active) {
+      statusBar = <div className='expired-status'> Expired </div>
     }
 
     return (
       <div className='row inventory-tile-container align-center'>
-          <div className={"small-10 small-centered columns inventory-tile " + outline}>
+          <div className={"small-10 small-centered columns inventory-tile"}>
             <a href={"/inventories/" + this.props.id} className='black-text'>
-              <h2> <span className='strong'>Item:</span> { this.props.item } </h2>
-              <h3> Quantity: { this.props.quantity } </h3>
-              <p> { this.props.store} </p>
-              { measurementP }
-              { claimed }
+              {statusBar}
+              <div className='tile-text'>
+                <h2> { this.props.item } </h2>
+                <h3> Quantity: { this.props.quantity } </h3>
+                { measurementP }
+                <p> { this.props.store} </p>
+              </div>
               </a>
           </div>
       </div>
