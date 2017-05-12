@@ -1,0 +1,38 @@
+@import "definitions";
+
+.wastenot-form {
+  margin: auto;
+
+  .field {
+    padding-bottom: 1em;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  input,
+  select {
+    border-radius: 3px;
+
+    &:focus {
+      border: 1px solid $green;
+    }
+  }
+}
+.actions {
+  input {
+    background-color: $green;
+    font-size: 1.2em;
+    padding: 0.5em;
+    width: 100%;
+
+    &:hover {
+      background-color: $orange;
+    }
+  }
+}
+
+.shared-links {
+  text-align: center;
+}

@@ -17,7 +17,7 @@ const InputField = props => {
 
   return (
     <div className='input'>
-      {props.label}: <input type='text' value={props.value} onChange={props.onChange} />
+      <input type='text' value={props.value} onChange={props.onChange} placeholder={props.placeholder} />
       <p>{errorMessage}</p>
     </div>
   )

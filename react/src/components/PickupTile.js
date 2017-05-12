@@ -14,10 +14,12 @@ class PickupTile extends Component {
       <div className='row pickup-tile-container'>
           <div className="small-10 small-centered columns pickup-tile">
             <a href={"/inventories/" + this.props.inventoryId} className='black-text'>
-              <h2> {this.props.storeName} </h2>
-              <p> <span className='strong'>Item:</span> { this.props.inventoryItem } </p>
-              <p> <span className='strong'>Quantity:</span> { this.props.inventoryQuantity } </p>
-              { measurementP }
+              <div className='tile-text'>
+                <h2> {this.props.storeName} </h2>
+                <p> <span className='strong'>Item:</span> { this.props.inventoryItem } </p>
+                <p> <span className='strong'>Quantity:</span> { this.props.inventoryQuantity } </p>
+                { measurementP }
+              </div>
             </a>
           </div>
       </div>
